@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.skeleton.activity.OTPActivity"
+    >
+    <include layout="@layout/custom_tool_bar"/>
+
+    <ImageView
+        style="@style/ImageView"
+        android:src="@drawable/unlocked"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/margin_normal"
+        >
+    <Button
+        style="@style/primary_button"
+        android:layout_height="@dimen/button_height_normal"
+        android:background="@drawable/button_shape"
+        android:layout_weight="1"
+        android:text="@string/button_resend_otp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_large"
+        android:drawableStart="@drawable/resend_otp"
+        android:padding="@dimen/padding_small"
+        />
+        <Button
+            style="@style/primary_button"
+            android:layout_height="@dimen/button_height_normal"
+            android:background="@drawable/button_shape"
+            android:layout_weight="1"
+            android:text="@string/button_edit_number"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_large"
+            android:drawableStart="@drawable/e_dit_number"
+            android:padding="@dimen/padding_small"
+            />
+    </LinearLayout>
+    <TextView
+        android:layout_margin="@dimen/margin_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_large"
+        android:textColor="@color/fake_black"
+        android:lineSpacingExtra="2.8sp"
+        android:gravity="center_horizontal"
+        tools:text="Please Enter OTP number you have recieved as an SMS on phone no :"
+        />
+
+
+</LinearLayout>

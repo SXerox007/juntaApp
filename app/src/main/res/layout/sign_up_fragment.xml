@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+    >
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_normal"
+            android:orientation="vertical"
+            >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/iv_profile_image"
+                android:layout_width="@dimen/image_width"
+                android:layout_height="@dimen/image_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:src="@drawable/my_profile_ph"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp"
+                />
+
+            <com.skeleton.util.customview.MaterialEditText
+                android:id="@+id/etName"
+                style="@style/edit_text"
+                android:hint="@string/edit_text_name"
+                android:inputType="text"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <com.skeleton.util.customview.MaterialEditText
+                    style="@style/edit_text"
+                    android:layout_weight="4"
+                    android:editable="false"
+                    android:text="@string/edit_text_phone_start"
+                    android:textSize="@dimen/font_xlarge"
+                    android:textStyle="bold"
+                    />
+
+                <com.skeleton.util.customview.MaterialEditText
+                    android:id="@+id/etPhoneNumber"
+                    style="@style/edit_text"
+                    android:layout_weight="1"
+                    android:hint="@string/edit_text_phone_number"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    />
+            </LinearLayout>
+
+            <com.skeleton.util.customview.MaterialEditText
+                android:id="@+id/etEmail"
+                style="@style/edit_text"
+                android:hint="@string/edit_text_email"
+                android:inputType="text"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_normal"
+                    android:layout_weight="5"
+                    android:editable="false"
+                    android:maxLines="2"
+                    android:text="@string/edit_text_select_gender"
+                    android:textSize="@dimen/font_large"
+                    android:textStyle="bold"
+                    />
+
+                <RadioGroup
+                    android:id="@+id/genderSelection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    >
+
+                    <RadioButton
+                        android:id="@+id/radio_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radio_button_male"
+                        />
+
+                    <RadioButton
+                        android:id="@+id/radio_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/radio_button_female"
+                        />
+                </RadioGroup>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:background="@color/black"
+                />
+
+            <com.skeleton.util.customview.MaterialEditText
+                android:id="@+id/etOrientation"
+                style="@style/edit_text"
+                android:layout_marginTop="@dimen/margin_small"
+                android:hint="@string/edit_text_orientation"
+                android:inputType="date"
+                android:maxLength="10"
+                />
+
+            <com.skeleton.util.customview.MaterialEditText
+                android:id="@+id/etDOB"
+                style="@style/edit_text"
+                android:layout_marginTop="@dimen/margin_small"
+                android:hint="@string/edit_text_data_of_birth"
+                android:inputType="date"
+                android:maxLength="10"
+                />
+
+            <com.skeleton.util.customview.MaterialEditText
+                android:id="@+id/etPassword"
+                style="@style/edit_text"
+                android:hint="@string/edit_text_password"
+                android:inputType="textPassword"/>
+
+            <com.skeleton.util.customview.MaterialEditText
+                android:id="@+id/etConfirmPassword"
+                style="@style/edit_text"
+                android:hint="@string/edit_text_confirm_password"
+                android:inputType="textPassword"/>
+
+            <android.support.v7.widget.AppCompatCheckBox
+                style="@style/checkBox"
+                />
+
+            <Button
+                android:id="@+id/btnSignup"
+                style="@style/primary_button"
+                android:background="@drawable/button_shape"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/button_signup"
+                />
+
+            <Button
+                android:id="@+id/btnSigupWithFacebook"
+                style="@style/primary_button"
+                android:background="@drawable/button_shape"
+                android:backgroundTint="@color/colorFaceBook"
+                android:text="@string/button_signup_with_facebook"
+                />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

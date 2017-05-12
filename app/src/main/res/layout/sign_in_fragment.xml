@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.skeleton.util.customview.MaterialEditText
+        android:id="@+id/etEmail"
+        style="@style/edit_text"
+        android:hint="@string/edit_text_email_or_phone_number"
+        android:inputType="text"/>
+
+    <com.skeleton.util.customview.MaterialEditText
+        android:id="@+id/etPassword"
+        style="@style/edit_text"
+        android:hint="@string/edit_text_password"
+        android:inputType="textPassword"/>
+
+    <android.support.v7.widget.AppCompatCheckBox
+        style="@style/checkBox"
+        android:layout_gravity="center"
+        android:text="@string/remember_me"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/etFrogetPassword"
+        style="@style/edit_text"
+        android:hint="@string/forget_password"
+        android:inputType="textPassword"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnSignin"
+        style="@style/primary_button"
+        android:background="@drawable/button_shape"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/button_signin"/>
+
+    <Button
+        android:id="@+id/btnSignUpWithPassword"
+        style="@style/primary_button"
+        android:background="@drawable/button_shape"
+        android:backgroundTint="@color/colorFaceBook"
+        android:text="@string/btn_sign_in_with_facebook"
+        />
+
+
+</LinearLayout>
+</android.support.v4.widget.NestedScrollView>
