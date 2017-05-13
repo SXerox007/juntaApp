@@ -36,6 +36,7 @@ public interface AppConstant {
     String KEY_FRAGMENT_GENDER = "gender";
     String KEY_FRAGMENT_ORIENTATION = "orientation";
     String KEY_FRAGMENT_PROFILE_PIC = "profilePic";
+    String KEY_OTP_CODE = "OTPCode";
 
     //USER_SIGNUP_VALUES
     String VALUE_FRAGMENT_LANGUAGE = "EN";
@@ -55,7 +56,12 @@ public interface AppConstant {
 
 
     //INTENT KEY
-    String INTENT_KEY_SIGN_UP = "keySignUp";
+    String INTENT_KEY_PHONE_NUMBER = "keyPhone";
+    String INTENT_KEY_COUNTRY_CODE = "keyCode";
+
+
+    //ERROR MSG
+    String ERROR_MSG_EMPTY = "All Fields are Mendatatory";
 
 
 }

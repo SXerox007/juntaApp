@@ -14,12 +14,13 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.PartMap;
 
 import static com.skeleton.constant.ApiKeyConstant.AUTHORIZATION;
 
 /**
- * Developer: Saurabh Verma
+ * Developer: Sumit Thakur
  * Dated: 27-09-2016.
  */
 public interface ApiInterface {
@@ -27,6 +28,7 @@ public interface ApiInterface {
     String USER_SIGNUP = "api/user/register";
     String USER_LOGIN = "api/user/login";
     String USER_GET_PROFILE = "api/user/getProfile";
+    String USER_OTP_CHECK = "api/user/verifyOTP";
 
     /**
      * @param authorization auth
@@ -51,6 +53,16 @@ public interface ApiInterface {
      */
     @GET(USER_GET_PROFILE)
     Call<Response> getProfile(@Header(AUTHORIZATION) String key);
+
+
+    /**
+     * @param authorization access token
+     * @param map           Hashmap
+     * @return user otp check correct or not
+     */
+    @PUT(USER_OTP_CHECK)
+    Call<Response> otpVerify(@Header(AUTHORIZATION) String authorization,
+                             @Body HashMap<String, String> map);
 
 //    /**
 //     * @param map

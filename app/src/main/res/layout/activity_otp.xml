@@ -93,6 +93,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnVerify"
         style="@style/primary_button"
         android:background="@drawable/button_shape"
         android:backgroundTint="@color/colorPrimary"

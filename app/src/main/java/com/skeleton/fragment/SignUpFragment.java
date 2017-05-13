@@ -237,9 +237,11 @@ public class SignUpFragment extends BaseFragment {
                     //Paper DB
                     Paper.book().write(ACCESS_TOKEN, ACESS_START + response.getData().getAccessToken());
                     Log.e("debug", ACESS_START + response.getData().getAccessToken());
+                    Log.e("debug", response.getData().getUserDetails().getPhoneNo());
+                    Log.e("debug", response.getData().getUserDetails().getCountryCode());
                     Intent intent = new Intent(getContext(), OTPActivity.class);
-                    intent.putExtra(INTENT_KEY_SIGN_UP, response.getData().getUserDetails().getCountryCode()
-                            + response.getData().getUserDetails().getPhoneNo());
+                    intent.putExtra(INTENT_KEY_PHONE_NUMBER, response.getData().getUserDetails().getPhoneNo());
+                    intent.putExtra(INTENT_KEY_COUNTRY_CODE, response.getData().getUserDetails().getCountryCode());
                     startActivity(intent);
                 }
             }
