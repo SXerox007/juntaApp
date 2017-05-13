@@ -12,7 +12,6 @@ import android.provider.Settings;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.skeleton.R;
-import com.skeleton.database.CommonData;
 import com.skeleton.fcm.FCMTokenInterface;
 import com.skeleton.fcm.MyFirebaseInstanceIdService;
 import com.skeleton.model.Response;

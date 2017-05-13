@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +17,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.kbeanie.multipicker.api.entity.ChosenImage;
 import com.skeleton.R;
+import com.skeleton.activity.OTPActivity;
 import com.skeleton.model.Response;
 import com.skeleton.retrofit.APIError;
 import com.skeleton.retrofit.ApiInterface;
@@ -58,9 +56,6 @@ public class SignUpFragment extends BaseFragment {
     private RadioGroup radioGroup;
     private int mGender = VALUE_FLAG;
     private RadioButton rbMale;
-    private FragmentManager fragmentManager;
-    private FragmentTransaction fragmentTransaction;
-    private Fragment fragment;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -239,11 +234,13 @@ public class SignUpFragment extends BaseFragment {
                 if ("200".equals(response.getStatusCode().toString())) {
                     Log.e("debug", "POST Sucess");
                     clearFields(etName, etConfirmPassword, etDateOfBirth, etEmail, etPassword, etPhoneNumber);
-                    // Example how to get data from response
-                    // response.getData().getUserDetails().getDob();
-                    //Paper DB write into the Paper db
+                    //Paper DB
                     Paper.book().write(ACCESS_TOKEN, ACESS_START + response.getData().getAccessToken());
                     Log.e("debug", ACESS_START + response.getData().getAccessToken());
+                    Intent intent = new Intent(getContext(), OTPActivity.class);
+                    intent.putExtra(INTENT_KEY_SIGN_UP, response.getData().getUserDetails().getCountryCode()
+                            + response.getData().getUserDetails().getPhoneNo());
+                    startActivity(intent);
                 }
             }
 

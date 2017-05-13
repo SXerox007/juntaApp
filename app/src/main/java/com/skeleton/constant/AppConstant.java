@@ -54,5 +54,8 @@ public interface AppConstant {
     String ACESS_START = "bearer ";
 
 
+    //INTENT KEY
+    String INTENT_KEY_SIGN_UP = "keySignUp";
+
 
 }

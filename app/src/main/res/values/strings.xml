@@ -57,6 +57,7 @@
     <string name="button_signup_with_facebook">Sign Up With Facebook</string>
     <string name="button_resend_otp">Resend OTP</string>
     <string name="button_edit_number">Edit Number</string>
+    <string name="button_verify">Verify</string>
 
 
     <string name="radio_button_male">Male</string>
@@ -79,5 +80,8 @@
     <string name="edit_text_phone_start">+91</string>
     <string name="edit_text_select_gender">Select\nGender:</string>
     <string name="edit_text_orientation">Orientation</string>
+
+
+    <string name="otp_text">Please Enter OTP number you have recieved as an SMS on phone no :</string>
 
 </resources>
