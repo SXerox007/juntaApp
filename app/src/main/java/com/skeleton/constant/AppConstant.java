@@ -63,5 +63,8 @@ public interface AppConstant {
     //ERROR MSG
     String ERROR_MSG_EMPTY = "All Fields are Mendatatory";
 
+    //STRING MSG
+    String MSG_ORIENTATION_TITLE = "Orientation";
+
 
 }

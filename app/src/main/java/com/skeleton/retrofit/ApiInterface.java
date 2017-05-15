@@ -29,6 +29,7 @@ public interface ApiInterface {
     String USER_LOGIN = "api/user/login";
     String USER_GET_PROFILE = "api/user/getProfile";
     String USER_OTP_CHECK = "api/user/verifyOTP";
+    String USER_OTP_RESEND = "api/user/resendOTP";
 
     /**
      * @param authorization auth
@@ -53,6 +54,13 @@ public interface ApiInterface {
      */
     @GET(USER_GET_PROFILE)
     Call<Response> getProfile(@Header(AUTHORIZATION) String key);
+
+    /**
+     * @param key authorization key
+     * @return resend otp
+     */
+    @GET(USER_OTP_RESEND)
+    Call<Response> resendOTP(@Header(AUTHORIZATION) String key);
 
 
     /**

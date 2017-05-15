@@ -28,18 +28,21 @@ import io.paperdb.Paper;
  * Dated: 13-05-2017.
  */
 public class OTPActivity extends BaseActivity implements TextWatcher, View.OnClickListener {
-    private Button btnResend, btnEditNo, btnverified;
+    private Button btnResend, btnEditNo, btnverified, btnTool;
     private MaterialEditText metOTP1, metOTP2, metOTP3, metOTP4;
     private TextView tvPhoneNumber;
     private ValidateEditText validateEditText;
+    private Intent intent = getIntent();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
         init();
+        tvPhoneNumber.setText(Paper.book().read(INTENT_KEY_COUNTRY_CODE) + "-" + Paper.book().read(INTENT_KEY_PHONE_NUMBER));
+        btnTool.setVisibility(View.GONE);
         btnverified.setOnClickListener(this);
-
+        btnResend.setOnClickListener(this);
     }
 
 
@@ -56,6 +59,11 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
         metOTP4 = (MaterialEditText) findViewById(R.id.etOTP4);
         tvPhoneNumber = (TextView) findViewById(R.id.tvPhoneNumber);
         validateEditText = new ValidateEditText();
+        btnTool = (Button) findViewById(R.id.btnToolBar);
+        metOTP1.addTextChangedListener(this);
+        metOTP2.addTextChangedListener(this);
+        metOTP3.addTextChangedListener(this);
+        metOTP4.addTextChangedListener(this);
     }
 
 
@@ -66,6 +74,17 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
 
     @Override
     public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+        if (metOTP1.getText().toString().length() == 1) {
+            metOTP2.requestFocus();
+        }
+        if (metOTP2.getText().toString().length() == 1) {
+            metOTP3.requestFocus();
+        }
+        if (metOTP3.getText().toString().length() == 1) {
+            metOTP4.requestFocus();
+        }
+
+
     }
 
     @Override
@@ -75,6 +94,7 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
 
     @Override
     public void onClick(final View v) {
+        ApiInterface apiInterface = RestClient.getApiInterface();
         switch (v.getId()) {
             case R.id.btnVerify:
                 if (validateEditText.genericEmpty(metOTP1, ERROR_MSG_EMPTY)
@@ -82,9 +102,30 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
                         && validateEditText.genericEmpty(metOTP3, ERROR_MSG_EMPTY)
                         && validateEditText.genericEmpty(metOTP4, ERROR_MSG_EMPTY)) {
                     otpVerifyCheck();
+                    clearFields(metOTP1, metOTP2, metOTP3, metOTP4);
                 } else {
                     Log.e("debug", "All OTP Fields fill completely");
                 }
+                break;
+            case R.id.btnResendOTP:
+                apiInterface.resendOTP((String) Paper.book().read(ACCESS_TOKEN)).enqueue(new ResponseResolver<Response>(this, true, true) {
+                    @Override
+                    public void success(final Response response) {
+                        if ("200".equals(response.getStatusCode())) {
+                            Log.e("debug", "OTP resend.");
+                        } else {
+                            Log.e("debug", "OTP resend failed in Sucess.");
+                        }
+                    }
+
+                    @Override
+                    public void failure(final APIError error) {
+                        Log.e("debug", "OTP resend in Failure");
+                    }
+                });
+
+                break;
+            case R.id.btnEditNumber:
                 break;
             default:
                 break;
@@ -96,10 +137,9 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
      * OTP verification form server
      */
     private void otpVerifyCheck() {
-        Intent intent = getIntent();
         HashMap<String, String> hashMap = new CommonParams.Builder()
-                .add(KEY_FRAGMENT_COUNTRY_CODE, intent.getStringExtra(INTENT_KEY_COUNTRY_CODE).toString())
-                .add(KEY_FRAGMENT_PHONE, intent.getStringExtra(INTENT_KEY_PHONE_NUMBER).toString())
+                .add(KEY_FRAGMENT_COUNTRY_CODE, Paper.book().read(INTENT_KEY_COUNTRY_CODE))
+                .add(KEY_FRAGMENT_PHONE, Paper.book().read(INTENT_KEY_PHONE_NUMBER))
                 .add(KEY_OTP_CODE, metOTP1.getText().toString()
                         + metOTP2.getText().toString()
                         + metOTP3.getText().toString()
@@ -122,5 +162,13 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
         });
     }
 
+    /**
+     * @param materialEditText parametr material edit text
+     */
+    private void clearFields(final MaterialEditText... materialEditText) {
+        for (MaterialEditText editText : materialEditText) {
+            editText.setText("");
+        }
+    }
 
 }

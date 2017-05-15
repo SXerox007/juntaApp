@@ -205,13 +205,13 @@ public class CustomAlertDialog {
          * being canceled or one of the supplied choices being selected.
          * If you are interested in listening for all cases where the dialog is dismissed
          * and not just when it is canceled, see
-         * {@link #setOnCancelListener(android.content.DialogInterface.OnCancelListener)
+         * {//@link #setOnCancelListener(android.content.DialogInterface.OnCancelListener)
          * setOnDismissListener}*.</p>
          *
          * @param onCancelListener the on cancel listener
          * @return This Builder object to allow for chaining of calls to set methods
          * @see #setCancelable(boolean) #setCancelable(boolean)
-         * @see #setOnCancelListener(android.content.DialogInterface.OnCancelListener)
+         * //@see #setOnCancelListener(android.content.DialogInterface.OnCancelListener)
          * #setOnDismissListener(android.content.DialogInterface.OnDismissListener)
          */
         public Builder setOnCancelListener(final CustomDialogInterface.OnCancelListener onCancelListener) {

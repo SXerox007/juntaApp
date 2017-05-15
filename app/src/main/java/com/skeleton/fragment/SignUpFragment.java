@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -27,6 +28,7 @@ import com.skeleton.retrofit.RestClient;
 import com.skeleton.util.Log;
 import com.skeleton.util.ValidateEditText;
 import com.skeleton.util.customview.MaterialEditText;
+import com.skeleton.util.dialog.CustomAlertDialog;
 import com.skeleton.util.imagepicker.ImageChooser;
 
 import java.io.File;
@@ -56,12 +58,22 @@ public class SignUpFragment extends BaseFragment {
     private RadioGroup radioGroup;
     private int mGender = VALUE_FLAG;
     private RadioButton rbMale;
+    private TextView tvOrient;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sign_up_fragment, container, false);
         init(view);
+        tvOrient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                CustomAlertDialog.Builder builder = new CustomAlertDialog.Builder(getContext());
+                builder.setTitle(MSG_ORIENTATION_TITLE);
 
+                android.support.v7.app.AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(final RadioGroup group, @IdRes final int checkedId) {
@@ -119,6 +131,7 @@ public class SignUpFragment extends BaseFragment {
      * @param view view
      */
     private void init(final View view) {
+        tvOrient = (TextView) view.findViewById(R.id.etOrientation);
         ivProfile = (ImageView) view.findViewById(R.id.iv_profile_image);
         etName = (MaterialEditText) view.findViewById(R.id.etName);
         etPhoneNumber = (MaterialEditText) view.findViewById(R.id.etPhoneNumber);
@@ -236,12 +249,12 @@ public class SignUpFragment extends BaseFragment {
                     clearFields(etName, etConfirmPassword, etDateOfBirth, etEmail, etPassword, etPhoneNumber);
                     //Paper DB
                     Paper.book().write(ACCESS_TOKEN, ACESS_START + response.getData().getAccessToken());
+                    Paper.book().write(INTENT_KEY_COUNTRY_CODE, response.getData().getUserDetails().getCountryCode());
+                    Paper.book().write(INTENT_KEY_PHONE_NUMBER, response.getData().getUserDetails().getPhoneNo());
                     Log.e("debug", ACESS_START + response.getData().getAccessToken());
                     Log.e("debug", response.getData().getUserDetails().getPhoneNo());
                     Log.e("debug", response.getData().getUserDetails().getCountryCode());
                     Intent intent = new Intent(getContext(), OTPActivity.class);
-                    intent.putExtra(INTENT_KEY_PHONE_NUMBER, response.getData().getUserDetails().getPhoneNo());
-                    intent.putExtra(INTENT_KEY_COUNTRY_CODE, response.getData().getUserDetails().getCountryCode());
                     startActivity(intent);
                 }
             }
