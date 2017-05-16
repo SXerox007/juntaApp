@@ -16,8 +16,10 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.PartMap;
+import retrofit2.http.Query;
 
 import static com.skeleton.constant.ApiKeyConstant.AUTHORIZATION;
+import static com.skeleton.constant.ApiKeyConstant.REQUEST_TYPE;
 
 /**
  * Developer: Sumit Thakur
@@ -31,6 +33,7 @@ public interface ApiInterface {
     String USER_OTP_CHECK = "api/user/verifyOTP";
     String USER_OTP_RESEND = "api/user/resendOTP";
     String USER_PROFILE_CONSTANTS = "api/profile/constants";
+    String USER_IMAGE_CONSTANTS = "api/category/list";
 
 
     /**
@@ -56,6 +59,15 @@ public interface ApiInterface {
      */
     @GET(USER_GET_PROFILE)
     Call<Response> getProfile(@Header(AUTHORIZATION) String key);
+
+    /**
+     * @param authorization authorization
+     * @param requestType   request type
+     * @return return the image constaants
+     */
+    @GET(USER_IMAGE_CONSTANTS)
+    Call<com.skeleton.model.Profile2.Response> profileImageSet(@Header(AUTHORIZATION) String authorization,
+                                                               @Query(REQUEST_TYPE) String requestType);
 
     /**
      * @return the profile all constants

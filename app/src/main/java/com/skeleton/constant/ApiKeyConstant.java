@@ -10,6 +10,7 @@ public interface ApiKeyConstant {
     String DATA = "data";
     String STATUS_CODE = "statusCode";
     String AUTHORIZATION = "authorization";
+    String REQUEST_TYPE = "requestType";
     String BOOKING_ID = "bookingId";
     String LATITUDE = "lat";
     String LONGITUDE = "lng";
