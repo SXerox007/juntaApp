@@ -37,6 +37,7 @@ public interface AppConstant {
     String KEY_FRAGMENT_ORIENTATION = "orientation";
     String KEY_FRAGMENT_PROFILE_PIC = "profilePic";
     String KEY_OTP_CODE = "OTPCode";
+    String KEY_INTEREST = "INTEREST";
 
     //USER_SIGNUP_VALUES
     String VALUE_FRAGMENT_LANGUAGE = "EN";

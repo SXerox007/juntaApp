@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.skeleton.R;
-import com.skeleton.fragment.ProfileCompletenessStep1Fragment;
+import com.skeleton.fragment.ProfileCompletenessStep2Fragment;
 
 /**
  * Developer: Sumit Thakur
@@ -33,7 +33,7 @@ public class UserProfile extends AppCompatActivity {
         btnTitle.setText(R.string.button_skip);
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragment = new ProfileCompletenessStep1Fragment();
+        fragment = new ProfileCompletenessStep2Fragment();
         fragmentTransaction.replace(R.id.flProfileCompleteness, fragment);
         fragmentTransaction.commit();
 
