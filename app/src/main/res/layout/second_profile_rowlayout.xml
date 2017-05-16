@@ -39,9 +39,7 @@
             android:layout_marginTop="@dimen/margin_normal"
             app:civ_border_color="@color/black"
             />
-
     </RelativeLayout>
-
 
     <TextView
         android:id="@+id/tv"

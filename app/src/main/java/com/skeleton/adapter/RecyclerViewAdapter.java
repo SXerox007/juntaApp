@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.skeleton.R;
 import com.skeleton.constant.AppConstant;
+import com.skeleton.fragment.ProfileCompletenessStep2Fragment;
 import com.skeleton.model.Profile2.Categories;
 
 import java.util.HashMap;
@@ -20,19 +21,22 @@ import java.util.List;
  * Dated: 16-05-2017.
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private static int count = 0;
+    private static int count = 1;
     private Context context;
     private List<Categories> categories;
     private HashMap<String, String> hashMap = new HashMap<>();
+    private ProfileCompletenessStep2Fragment profileCompletenessStep2Fragment;
 
 
     /**
-     * @param context    context
-     * @param categories categories
+     * @param context                          context
+     * @param categories                       categories
+     * @param profileCompletenessStep2Fragment profile completeness
      */
-    public RecyclerViewAdapter(final Context context, final List<Categories> categories) {
+    public RecyclerViewAdapter(final Context context, final List<Categories> categories, final ProfileCompletenessStep2Fragment profileCompletenessStep2Fragment) {
         this.context = context;
         this.categories = categories;
+        this.profileCompletenessStep2Fragment = profileCompletenessStep2Fragment;
     }
 
 
@@ -43,7 +47,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         convertView = LayoutInflater.from(context).inflate(R.layout.second_profile_rowlayout, parent, false);
         ViewHolder viewHolder = new ViewHolder(convertView);
         return viewHolder;
-
     }
 
 
@@ -51,7 +54,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(final RecyclerViewAdapter.ViewHolder holder, final int position) {
         Categories obj = categories.get(position);
         holder.mText.setText(obj.getName());
-
     }
 
     @Override
@@ -100,6 +102,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     count--;
                 }
             }
+        }
+
+        /**
+         * bar fill
+         */
+        private void barFill() {
         }
     }
 }

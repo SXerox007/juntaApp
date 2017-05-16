@@ -44,7 +44,7 @@ public interface AppConstant {
     String VALUE_FRAGMENT_DEVICE_TYPE = "ANDROID";
     String VALUE_RAGMENT_DEVICE_TOKEN = "token";
     int VALUE_FRAGMENT_APP_VERSION = 100;
-    int VALUE_IMAGE_COUNTER = 5;
+    int VALUE_IMAGE_COUNTER = 6;
     int VALUE_FLAG = 3;
 
 
