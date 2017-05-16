@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.skeleton.R;
@@ -21,6 +22,7 @@ public class ProfileCompletenessStep1Fragment extends Fragment implements View.O
 
     private TextView tvHistoryRelation, tvEthnicity, tvReligion, tvHeight, tvBodyType, tvSmoking, tvDrinking, tvOrientation;
     private com.skeleton.model.Profile.Data data = new com.skeleton.model.Profile.Data();
+    private ImageView ivLeft, ivRight, ivCenter;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -45,7 +47,6 @@ public class ProfileCompletenessStep1Fragment extends Fragment implements View.O
 
             }
         });
-
         tvHistoryRelation = (TextView) v.findViewById(R.id.tvRelationshipHistory);
         tvEthnicity = (TextView) v.findViewById(R.id.tvEuthnicity);
         tvReligion = (TextView) v.findViewById(R.id.tvReligion);
@@ -54,6 +55,11 @@ public class ProfileCompletenessStep1Fragment extends Fragment implements View.O
         tvSmoking = (TextView) v.findViewById(R.id.tvSmoking);
         tvDrinking = (TextView) v.findViewById(R.id.tvDrinking);
         tvOrientation = (TextView) v.findViewById(R.id.tvOrientation);
+        ivLeft = (ImageView) v.findViewById(R.id.iv_leftgreen);
+        ivRight = (ImageView) v.findViewById(R.id.iv_rightgreen);
+        ivCenter = (ImageView) v.findViewById(R.id.iv_centergreen);
+        ivCenter.setVisibility(View.GONE);
+        ivRight.setVisibility(View.GONE);
         onclickOnItems();
     }
 
@@ -74,7 +80,7 @@ public class ProfileCompletenessStep1Fragment extends Fragment implements View.O
 
     @Override
     public void onClick(final View v) {
-/*
+    /*
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.text_view_releationship_history)
                 .setItems(data.getRelationshipHistory(), new DialogInterface.OnClickListener() {
@@ -84,6 +90,6 @@ public class ProfileCompletenessStep1Fragment extends Fragment implements View.O
                     }
                 });
         builder.create();
-        */
+     */
     }
 }

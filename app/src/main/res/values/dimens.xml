@@ -63,7 +63,8 @@
     <dimen name="sign_up_height">340dp</dimen>
 
     <dimen name="text_view_height">4dp</dimen>
-
+    <dimen name="releative_layout_width">210dp</dimen>
+    <dimen name="relative_layout_height">40dp</dimen>
 
 
 

@@ -65,6 +65,4 @@ public interface AppConstant {
 
     //STRING MSG
     String MSG_ORIENTATION_TITLE = "Orientation";
-
-
 }

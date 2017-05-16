@@ -28,8 +28,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_normal"
                 android:src="@drawable/my_profile_ph"
-                app:civ_border_color="#FF000000"
-                app:civ_border_width="2dp"
+                app:civ_border_color="@color/black"
+                app:civ_border_width="1dp"
                 />
 
             <com.skeleton.util.customview.MaterialEditText

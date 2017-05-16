@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical">
+              android:layout_margin="@dimen/margin_normal"
+              android:orientation="vertical"
+    >
 
-    <include layout="@layout/profile_completeness" />
+    <include layout="@layout/profile_completeness"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,17 +39,14 @@
             style="@style/fill_color_bars"
             />
 
-        <TextView
-            android:id="@+id/tvBar6"
-            style="@style/fill_color_bars"
-            />
-
-        <TextView
-            android:id="@+id/tvBar7"
-            style="@style/fill_color_bars"
-            />
     </LinearLayout>
 
-    <include layout="@layout/list_profile_step1_fragment"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvUserIntrest"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        >
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>
