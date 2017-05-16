@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.skeleton.R;
+import com.skeleton.constant.AppConstant;
 import com.skeleton.model.Profile2.Categories;
 
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import java.util.List;
  * Dated: 16-05-2017.
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+    private static int count = 0;
     private Context context;
     private List<Categories> categories;
     private HashMap<String, String> hashMap = new HashMap<>();
@@ -60,9 +62,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     /**
      * view holder
      */
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, AppConstant {
         private TextView mText;
-        private ImageView ivImage, ivcheck;
+        private ImageView ivImage, ivcheck, ivBlur;
+
 
         /**
          * @param itemView item view
@@ -72,6 +75,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             mText = (TextView) itemView.findViewById(R.id.tv);
             ivImage = (ImageView) itemView.findViewById(R.id.iv_image);
             ivcheck = (ImageView) itemView.findViewById(R.id.iv_check_mark);
+            ivBlur = (ImageView) itemView.findViewById(R.id.iv_image_blur);
             itemView.setOnClickListener(this);
         }
 
@@ -79,10 +83,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onClick(final View v) {
             int pos = getAdapterPosition();
-            if (ivcheck.getDrawable() == null) {
-                ivcheck.setImageResource(R.drawable.check_mark);
+            if (count < VALUE_IMAGE_COUNTER) {
+                if (ivcheck.getDrawable() == null) {
+                    ivcheck.setImageResource(R.drawable.check_mark);
+                    ivBlur.setImageResource(R.color.translucent);
+                    count++;
+                } else {
+                    ivcheck.setImageDrawable(null);
+                    ivBlur.setImageDrawable(null);
+                    count--;
+                }
             } else {
-                ivcheck.setImageDrawable(null);
+                if (ivcheck.getDrawable() != null) {
+                    ivcheck.setImageDrawable(null);
+                    ivBlur.setImageDrawable(null);
+                    count--;
+                }
             }
         }
     }

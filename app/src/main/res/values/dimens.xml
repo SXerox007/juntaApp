@@ -30,6 +30,10 @@
     <dimen name="button_height_short">35dp</dimen>
     <dimen name="button_height_small">24dp</dimen>
 
+    <!-- typical sizes of text view -->
+    <dimen name="text_view_normal">40dp</dimen>
+
+
     <!--met editext-->
     <dimen name="default_padding_top">8dp</dimen>
     <dimen name="default_padding_bottom">8dp</dimen>
@@ -65,7 +69,6 @@
     <dimen name="text_view_height">4dp</dimen>
     <dimen name="releative_layout_width">210dp</dimen>
     <dimen name="relative_layout_height">40dp</dimen>
-
 
 
 </resources>

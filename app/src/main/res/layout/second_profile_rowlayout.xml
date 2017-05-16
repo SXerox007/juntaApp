@@ -22,6 +22,16 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/iv_image_blur"
+            android:layout_width="@dimen/button_height_tall"
+            android:layout_height="@dimen/button_height_tall"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="@dimen/margin_normal"
+            app:civ_border_color="@color/colorPrimary"
+            />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/iv_check_mark"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -36,9 +46,10 @@
     <TextView
         android:id="@+id/tv"
         style="@style/text_view"
+        android:layout_height="@dimen/text_view_normal"
         android:layout_gravity="center"
+        android:maxLines="2"
         android:text="Camping"
-        android:textSize="@dimen/font_normal"
+        android:textSize="@dimen/font_small"
         />
-
 </LinearLayout>
