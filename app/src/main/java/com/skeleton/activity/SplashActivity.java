@@ -39,7 +39,6 @@ public class SplashActivity extends BaseActivity implements FCMTokenInterface {
         init();
     }
 
-
     /**
      *
      */
@@ -130,6 +129,7 @@ public class SplashActivity extends BaseActivity implements FCMTokenInterface {
                         Log.e("debug", "sucess Acess Token");
                         if (commonResponse.getData().getUserDetails().getPhoneVerified()) {
                             Log.e("debug", "Phone Verifed");
+                            startActivity(new Intent(getApplicationContext(), UserProfile.class));
                         } else {
                             Log.e("debug", "Phone Not Verifed");
                             startActivity(new Intent(getApplicationContext(), OTPActivity.class));

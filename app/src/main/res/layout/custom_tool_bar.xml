@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="top"
-                android:background="@drawable/top_bar"
+                android:background="@color/transparent"
                 android:minHeight="?attr/actionBarSize">
 
     <TextView
@@ -31,6 +31,7 @@
         android:id="@+id/btnToolBar"
         android:layout_width="@dimen/button_height_tall"
         android:layout_height="@dimen/button_height_small"
+        android:layout_marginEnd="@dimen/margin_normal"
         android:layout_alignBottom="@+id/ivDrawer"
         android:layout_alignParentEnd="true"
         android:background="@drawable/button_shape"

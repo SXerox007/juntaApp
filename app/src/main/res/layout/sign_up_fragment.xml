@@ -125,9 +125,7 @@
                 android:id="@+id/etOrientation"
                 style="@style/edit_text"
                 android:layout_marginTop="@dimen/margin_small"
-                android:hint="@string/edit_text_orientation"
-                android:inputType="date"
-                android:maxLength="10"
+                android:hint="@string/text_view_orientation"
                 android:drawableEnd="@drawable/height_dropdown"
                 />
 

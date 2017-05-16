@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@drawable/background_parts">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_small"
+            android:src="@drawable/one_step"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_normal"
+        >
+
+        <TextView
+            android:id="@+id/tvBar1"
+            style="@style/fill_color_bars"
+            />
+
+        <TextView
+            android:id="@+id/tvBar2"
+            style="@style/fill_color_bars"
+            />
+
+        <TextView
+            android:id="@+id/tvBar3"
+            style="@style/fill_color_bars"
+            />
+
+        <TextView
+            android:id="@+id/tvBar4"
+            style="@style/fill_color_bars"
+            />
+
+        <TextView
+            android:id="@+id/tvBar5"
+            style="@style/fill_color_bars"
+            />
+
+        <TextView
+            android:id="@+id/tvBar6"
+            style="@style/fill_color_bars"
+            />
+
+        <TextView
+            android:id="@+id/tvBar7"
+            style="@style/fill_color_bars"
+            />
+    </LinearLayout>
+
+    <include layout="@layout/list_profile_step1_fragment"/>
+
+</LinearLayout>

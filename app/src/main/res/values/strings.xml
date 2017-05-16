@@ -58,6 +58,8 @@
     <string name="button_resend_otp">Resend OTP</string>
     <string name="button_edit_number">Edit Number</string>
     <string name="button_verify">Verify</string>
+    <string name="button_next">Next</string>
+    <string name="button_skip">Skip >> </string>
 
 
     <string name="radio_button_male">Male</string>
@@ -79,9 +81,20 @@
     <string name="edit_text_email_or_phone_number">Email/Phome Number</string>
     <string name="edit_text_phone_start">+91</string>
     <string name="edit_text_select_gender">Select\nGender:</string>
-    <string name="edit_text_orientation">Orientation</string>
 
 
     <string name="otp_text">Please Enter OTP number you have recieved as an SMS on phone no :</string>
+
+    <!--Text View-->
+    <string name="text_view_releationship_history">Relationship history</string>
+    <string name="text_view_euthnicity">Euthnicity</string>
+    <string name="text_view_religion">Religion</string>
+    <string name="text_view_height">Height</string>
+    <string name="text_view_body_type">Body Type</string>
+    <string name="text_view_smoking">Smoking</string>
+    <string name="text_view_Drinking">Drinking</string>
+    <string name="text_view_orientation">Orientation</string>
+    <string name="text_view_profile_completeness">Profile completeness</string>
+
 
 </resources>

@@ -90,7 +90,7 @@ public class Data {
     }
 
     /**
-     * @param bodyType  bodytype set
+     * @param bodyType bodytype set
      */
     public void setBodyType(final List<String> bodyType) {
         this.bodyType = bodyType;

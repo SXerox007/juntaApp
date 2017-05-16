@@ -150,8 +150,12 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
             public void success(final Response response) {
                 if ("200".equals(response.getStatusCode())) {
                     Log.e("debug", "OTP verifed");
+                    intent = new Intent(OTPActivity.this, UserProfile.class);
+                    startActivity(intent);
                 } else {
                     Log.e("debug", "In sucess OTP not verified ");
+                    intent = new Intent(OTPActivity.this, UserProfile.class);
+                    startActivity(intent);
                 }
             }
 
