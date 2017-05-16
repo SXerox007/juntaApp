@@ -30,6 +30,8 @@ public interface ApiInterface {
     String USER_GET_PROFILE = "api/user/getProfile";
     String USER_OTP_CHECK = "api/user/verifyOTP";
     String USER_OTP_RESEND = "api/user/resendOTP";
+    String USER_PROFILE_CONSTANTS = "api/profile/constants";
+
 
     /**
      * @param authorization auth
@@ -54,6 +56,12 @@ public interface ApiInterface {
      */
     @GET(USER_GET_PROFILE)
     Call<Response> getProfile(@Header(AUTHORIZATION) String key);
+
+    /**
+     * @return the profile all constants
+     */
+    @GET(USER_PROFILE_CONSTANTS)
+    Call<com.skeleton.model.Profile.Response> profileConstant();
 
     /**
      * @param key authorization key

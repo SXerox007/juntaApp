@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.skeleton.R;
+import com.skeleton.retrofit.APIError;
+import com.skeleton.retrofit.ApiInterface;
+import com.skeleton.retrofit.ResponseResolver;
+import com.skeleton.retrofit.RestClient;
 
 /**
  * Developer: Sumit Thakur
@@ -16,6 +20,7 @@ import com.skeleton.R;
 public class ProfileCompletenessStep1Fragment extends Fragment implements View.OnClickListener {
 
     private TextView tvHistoryRelation, tvEthnicity, tvReligion, tvHeight, tvBodyType, tvSmoking, tvDrinking, tvOrientation;
+    private com.skeleton.model.Profile.Data data = new com.skeleton.model.Profile.Data();
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -28,6 +33,19 @@ public class ProfileCompletenessStep1Fragment extends Fragment implements View.O
      * @param v view
      */
     private void init(final View v) {
+        ApiInterface apiInterface = RestClient.getApiInterface();
+        apiInterface.profileConstant().enqueue(new ResponseResolver<com.skeleton.model.Profile.Response>(getActivity(), true, true) {
+            @Override
+            public void success(final com.skeleton.model.Profile.Response response) {
+
+            }
+
+            @Override
+            public void failure(final APIError error) {
+
+            }
+        });
+
         tvHistoryRelation = (TextView) v.findViewById(R.id.tvRelationshipHistory);
         tvEthnicity = (TextView) v.findViewById(R.id.tvEuthnicity);
         tvReligion = (TextView) v.findViewById(R.id.tvReligion);
@@ -56,6 +74,16 @@ public class ProfileCompletenessStep1Fragment extends Fragment implements View.O
 
     @Override
     public void onClick(final View v) {
+/*
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(R.string.text_view_releationship_history)
+                .setItems(data.getRelationshipHistory(), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int which) {
 
+                    }
+                });
+        builder.create();
+        */
     }
 }
