@@ -39,9 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.context = context;
         this.categories = categories;
         this.profileCompletenessStep2Fragment = profileCompletenessStep2Fragment;
-
     }
-
 
     @Override
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
@@ -93,11 +91,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     ivcheck.setImageResource(R.drawable.check_mark);
                     ivBlur.setImageResource(R.color.translucent);
                     profileCompletenessStep2Fragment.barFill();
-                    //stringArrayList.add(mText.getText().toString());
+                    //stringArrayList.add();
                     count++;
                 } else {
                     ivcheck.setImageDrawable(null);
                     ivBlur.setImageDrawable(null);
+                    //int a = stringArrayList.indexOf(){
+                    //   return
+                    //}
                     profileCompletenessStep2Fragment.barUnfill();
                     count--;
                 }

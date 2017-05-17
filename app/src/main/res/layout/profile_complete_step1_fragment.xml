@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <include layout="@layout/profile_completeness" />
+    <include layout="@layout/profile_completeness"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,6 +46,12 @@
             android:id="@+id/tvBar7"
             style="@style/fill_color_bars"
             />
+
+        <TextView
+            android:id="@+id/tvBar8"
+            style="@style/fill_color_bars"
+            />
+
     </LinearLayout>
 
     <include layout="@layout/list_profile_step1_fragment"/>

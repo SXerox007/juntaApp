@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.skeleton.R;
 import com.skeleton.model.Profile.Response;
@@ -27,6 +28,7 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
     private MaterialEditText tvHistoryRelation, tvEthnicity, tvReligion, tvHeight, tvBodyType, tvSmoking, tvDrinking, tvOrientation;
     private ImageView ivLeft, ivRight, ivCenter;
     private Response responseFinal;
+    private TextView textViewBar1, textViewbar2, textViewBar3, textViewBar4, textViewBar5, textViewBar6, textViewBar7, textViewBar8;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -39,7 +41,14 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
      * @param v view
      */
     private void init(final View v) {
-
+        textViewBar1 = (TextView) v.findViewById(R.id.tvBar1);
+        textViewbar2 = (TextView) v.findViewById(R.id.tvBar2);
+        textViewBar3 = (TextView) v.findViewById(R.id.tvBar3);
+        textViewBar4 = (TextView) v.findViewById(R.id.tvBar4);
+        textViewBar5 = (TextView) v.findViewById(R.id.tvBar5);
+        textViewBar6 = (TextView) v.findViewById(R.id.tvBar6);
+        textViewBar7 = (TextView) v.findViewById(R.id.tvBar7);
+        textViewBar8 = (TextView) v.findViewById(R.id.tvBar8);
         tvHistoryRelation = (MaterialEditText) v.findViewById(R.id.tvRelationshipHistory);
         tvEthnicity = (MaterialEditText) v.findViewById(R.id.tvEuthnicity);
         tvReligion = (MaterialEditText) v.findViewById(R.id.tvReligion);
@@ -93,35 +102,35 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
             case R.id.tvRelationshipHistory:
                 Log.e("debug", "onclick Relation history");
                 popUp(RELATIONSHIP_HISTORY,
-                        tvHistoryRelation, responseFinal.getData().getRelationshipHistory());
+                        tvHistoryRelation, responseFinal.getData().getRelationshipHistory(), textViewBar1);
                 break;
             case R.id.tvEuthnicity:
                 popUp(EUTHNICITY,
-                        tvEthnicity, responseFinal.getData().getEthnicity());
+                        tvEthnicity, responseFinal.getData().getEthnicity(), textViewbar2);
                 break;
             case R.id.tvReligion:
                 popUp(RELIGION,
-                        tvReligion, responseFinal.getData().getReligion());
+                        tvReligion, responseFinal.getData().getReligion(), textViewBar3);
                 break;
             case R.id.tvHeight:
                 popUp(HEIGHT,
-                        tvHeight, responseFinal.getData().getHeight());
+                        tvHeight, responseFinal.getData().getHeight(), textViewBar4);
                 break;
             case R.id.tvBodyType:
                 popUp(BODY_TYPE,
-                        tvBodyType, responseFinal.getData().getBodyType());
+                        tvBodyType, responseFinal.getData().getBodyType(), textViewBar5);
                 break;
             case R.id.tvSmoking:
                 popUp(SMOKING,
-                        tvSmoking, responseFinal.getData().getSmoking());
+                        tvSmoking, responseFinal.getData().getSmoking(), textViewBar6);
                 break;
             case R.id.tvDrinking:
                 popUp(DRINKING,
-                        tvDrinking, responseFinal.getData().getDrinking());
+                        tvDrinking, responseFinal.getData().getDrinking(), textViewBar7);
                 break;
             case R.id.tvOrientation:
                 popUp(ORIENTATION,
-                        tvOrientation, responseFinal.getData().getOrientation());
+                        tvOrientation, responseFinal.getData().getOrientation(), textViewBar8);
                 break;
             default:
                 break;
@@ -134,8 +143,9 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
      * @param title            title
      * @param materialEditText material Edit Text
      * @param list             list
+     * @param textView         textView
      */
-    private void popUp(final String title, final MaterialEditText materialEditText, final List<String> list) {
+    private void popUp(final String title, final MaterialEditText materialEditText, final List<String> list, final TextView textView) {
         Log.e("debug", title);
         final CharSequence[] cs = list.toArray(new CharSequence[list.size()]);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -144,10 +154,10 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
                     @Override
                     public void onClick(final DialogInterface dialog, final int which) {
                         materialEditText.setText(cs[which]);
+                        textView.setBackgroundResource(R.color.colorPrimary);
                     }
                 });
         builder.create();
         builder.show();
     }
-
 }
