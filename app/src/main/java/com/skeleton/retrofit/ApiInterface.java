@@ -3,6 +3,7 @@ package com.skeleton.retrofit;
 
 import com.skeleton.model.Response;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import okhttp3.RequestBody;
@@ -34,6 +35,7 @@ public interface ApiInterface {
     String USER_OTP_RESEND = "api/user/resendOTP";
     String USER_PROFILE_CONSTANTS = "api/profile/constants";
     String USER_IMAGE_CONSTANTS = "api/category/list";
+    String USER_PROFILE_SETUP2 = "api/category/listForIDs";
 
 
     /**
@@ -42,8 +44,8 @@ public interface ApiInterface {
      * @return Post User_Login
      */
     @POST(USER_LOGIN)
-    Call<CommonResponse> userLogin(@Header(AUTHORIZATION) String authorization,
-                                   @Body HashMap<String, String> map);
+    Call<Response> userLogin(@Header(AUTHORIZATION) String authorization,
+                             @Body HashMap<String, String> map);
 
     /**
      * @param map map
@@ -91,6 +93,16 @@ public interface ApiInterface {
     @PUT(USER_OTP_CHECK)
     Call<Response> otpVerify(@Header(AUTHORIZATION) String authorization,
                              @Body HashMap<String, String> map);
+
+    /**
+     *
+     * @param authorization authorization
+     * @param stringArrayList  arraylist
+     * @return return reponse Profile
+     */
+    @PUT(USER_PROFILE_SETUP2)
+    Call<com.skeleton.model.Profile2.Response> listProfile2(@Header(AUTHORIZATION) String authorization,
+                                                            @Body ArrayList<String> stringArrayList);
 
 //    /**
 //     * @param map

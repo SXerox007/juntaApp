@@ -1,5 +1,6 @@
 package com.skeleton.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.skeleton.R;
@@ -29,9 +31,10 @@ import static com.skeleton.constant.AppConstant.KEY_INTEREST;
  */
 public class ProfileCompletenessStep2Fragment extends Fragment {
 
-    private RecyclerView rvRecyclerView;
-    private ProfileCompletenessStep2Fragment profileCompletenessStep2Fragment = new ProfileCompletenessStep2Fragment();
     private TextView tvBar1, tvBar2, tvBar3, tvBar4, tvBar5;
+    private ImageView imageView;
+    private RecyclerView rvRecyclerView;
+    private Drawable.ConstantState mColour, mColorPrimary;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -43,7 +46,9 @@ public class ProfileCompletenessStep2Fragment extends Fragment {
                     @Override
                     public void success(final Response response) {
                         Log.e("debug", "sucess complete");
-                        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(), response.getData().getCategories(), profileCompletenessStep2Fragment);
+                        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getContext(),
+                                response.getData().getCategories(),
+                                ProfileCompletenessStep2Fragment.this);
                         rvRecyclerView.setAdapter(recyclerViewAdapter);
                         rvRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
                         rvRecyclerView.setHasFixedSize(true);
@@ -51,7 +56,7 @@ public class ProfileCompletenessStep2Fragment extends Fragment {
 
                     @Override
                     public void failure(final APIError error) {
-                        Log.e("debug", "Failure");
+                        Log.e("debug", " In Failure");
                     }
                 });
 
@@ -62,13 +67,50 @@ public class ProfileCompletenessStep2Fragment extends Fragment {
     /**
      * @param view view
      */
-    private void init(View view) {
+    public void init(final View view) {
         rvRecyclerView = (RecyclerView) view.findViewById(R.id.rvUserIntrest);
         tvBar1 = (TextView) view.findViewById(R.id.tvBar1);
         tvBar2 = (TextView) view.findViewById(R.id.tvBar2);
         tvBar3 = (TextView) view.findViewById(R.id.tvBar3);
         tvBar4 = (TextView) view.findViewById(R.id.tvBar4);
         tvBar5 = (TextView) view.findViewById(R.id.tvBar5);
+        imageView = (ImageView) view.findViewById(R.id.iv_centergreen);
+        mColorPrimary = imageView.getBackground().getConstantState();
+        mColour = tvBar1.getBackground().getConstantState();
+    }
+
+    /**
+     * bar fill
+     */
+    public void barFill() {
+        if (tvBar1.getBackground().getConstantState().equals(mColour)) {
+            tvBar1.setBackgroundResource(R.color.colorPrimary);
+        } else if (tvBar2.getBackground().getConstantState().equals(mColour)) {
+            tvBar2.setBackgroundResource(R.color.colorPrimary);
+        } else if (tvBar3.getBackground().getConstantState().equals(mColour)) {
+            tvBar3.setBackgroundResource(R.color.colorPrimary);
+        } else if (tvBar4.getBackground().getConstantState().equals(mColour)) {
+            tvBar4.setBackgroundResource(R.color.colorPrimary);
+        } else {
+            tvBar5.setBackgroundResource(R.color.colorPrimary);
+        }
+    }
+
+    /**
+     * bar unfill
+     */
+    public void barUnfill() {
+        if (tvBar5.getBackground().getConstantState().equals(mColorPrimary)) {
+            tvBar5.setBackgroundResource(R.color.gray_light);
+        } else if (tvBar4.getBackground().getConstantState().equals(mColorPrimary)) {
+            tvBar4.setBackgroundResource(R.color.gray_light);
+        } else if (tvBar3.getBackground().getConstantState().equals(mColorPrimary)) {
+            tvBar3.setBackgroundResource(R.color.gray_light);
+        } else if (tvBar2.getBackground().getConstantState().equals(mColorPrimary)) {
+            tvBar2.setBackgroundResource(R.color.gray_light);
+        } else {
+            tvBar1.setBackgroundResource(R.color.gray_light);
+        }
     }
 
 }

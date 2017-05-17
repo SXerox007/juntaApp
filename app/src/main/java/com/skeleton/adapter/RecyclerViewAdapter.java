@@ -13,7 +13,7 @@ import com.skeleton.constant.AppConstant;
 import com.skeleton.fragment.ProfileCompletenessStep2Fragment;
 import com.skeleton.model.Profile2.Categories;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,19 +24,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private static int count = 1;
     private Context context;
     private List<Categories> categories;
-    private HashMap<String, String> hashMap = new HashMap<>();
+    private ArrayList<String> stringArrayList;
     private ProfileCompletenessStep2Fragment profileCompletenessStep2Fragment;
 
 
     /**
      * @param context                          context
      * @param categories                       categories
-     * @param profileCompletenessStep2Fragment profile completeness
+     * @param profileCompletenessStep2Fragment profile context
      */
-    public RecyclerViewAdapter(final Context context, final List<Categories> categories, final ProfileCompletenessStep2Fragment profileCompletenessStep2Fragment) {
+    public RecyclerViewAdapter(final Context context,
+                               final List<Categories> categories,
+                               final ProfileCompletenessStep2Fragment profileCompletenessStep2Fragment) {
         this.context = context;
         this.categories = categories;
         this.profileCompletenessStep2Fragment = profileCompletenessStep2Fragment;
+
     }
 
 
@@ -89,25 +92,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 if (ivcheck.getDrawable() == null) {
                     ivcheck.setImageResource(R.drawable.check_mark);
                     ivBlur.setImageResource(R.color.translucent);
+                    profileCompletenessStep2Fragment.barFill();
+                    //stringArrayList.add(mText.getText().toString());
                     count++;
                 } else {
                     ivcheck.setImageDrawable(null);
                     ivBlur.setImageDrawable(null);
+                    profileCompletenessStep2Fragment.barUnfill();
                     count--;
                 }
             } else {
                 if (ivcheck.getDrawable() != null) {
                     ivcheck.setImageDrawable(null);
                     ivBlur.setImageDrawable(null);
+                    profileCompletenessStep2Fragment.barUnfill();
                     count--;
                 }
             }
         }
 
-        /**
-         * bar fill
-         */
-        private void barFill() {
-        }
     }
 }

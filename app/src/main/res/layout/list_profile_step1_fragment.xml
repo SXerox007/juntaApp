@@ -15,100 +15,68 @@
             android:orientation="vertical"
             >
 
-            <TextView
+            <com.skeleton.util.customview.MaterialEditText
                 android:id="@+id/tvRelationshipHistory"
-                style="@style/edit_text"
+                style="@style/edit_text_profile"
                 android:layout_marginTop="@dimen/margin_small"
                 android:drawableEnd="@drawable/height_dropdown"
                 android:hint="@string/text_view_releationship_history"
                 />
 
-            <TextView
-                style="@style/line"
-                />
-
-            <TextView
+            <com.skeleton.util.customview.MaterialEditText
                 android:id="@+id/tvEuthnicity"
-                style="@style/edit_text"
+                style="@style/edit_text_profile"
                 android:layout_marginTop="@dimen/margin_small"
                 android:drawableEnd="@drawable/height_dropdown"
                 android:hint="@string/text_view_euthnicity"
                 />
 
-            <TextView
-                style="@style/line"
-                />
-
-            <TextView
+            <com.skeleton.util.customview.MaterialEditText
                 android:id="@+id/tvReligion"
-                style="@style/edit_text"
+                style="@style/edit_text_profile"
                 android:layout_marginTop="@dimen/margin_small"
                 android:drawableEnd="@drawable/height_dropdown"
                 android:hint="@string/text_view_religion"
                 />
 
-            <TextView
-                style="@style/line"
-                />
-
-            <TextView
+            <com.skeleton.util.customview.MaterialEditText
                 android:id="@+id/tvHeight"
-                style="@style/edit_text"
+                style="@style/edit_text_profile"
                 android:layout_marginTop="@dimen/margin_small"
                 android:drawableEnd="@drawable/height_dropdown"
                 android:hint="@string/text_view_height"
                 />
 
-            <TextView
-                style="@style/line"
-                />
-
-            <TextView
+            <com.skeleton.util.customview.MaterialEditText
                 android:id="@+id/tvBodyType"
-                style="@style/edit_text"
+                style="@style/edit_text_profile"
                 android:layout_marginTop="@dimen/margin_small"
                 android:drawableEnd="@drawable/height_dropdown"
                 android:hint="@string/text_view_body_type"
                 />
 
-            <TextView
-                style="@style/line"
-                />
-
-            <TextView
+            <com.skeleton.util.customview.MaterialEditText
                 android:id="@+id/tvSmoking"
-                style="@style/edit_text"
+                style="@style/edit_text_profile"
                 android:layout_marginTop="@dimen/margin_small"
                 android:drawableEnd="@drawable/height_dropdown"
                 android:hint="@string/text_view_smoking"
                 />
 
-            <TextView
-                style="@style/line"
-                />
-
-            <TextView
+            <com.skeleton.util.customview.MaterialEditText
                 android:id="@+id/tvDrinking"
-                style="@style/edit_text"
+                style="@style/edit_text_profile"
                 android:layout_marginTop="@dimen/margin_small"
                 android:drawableEnd="@drawable/height_dropdown"
                 android:hint="@string/text_view_Drinking"
                 />
 
-            <TextView
-                style="@style/line"
-                />
-
-            <TextView
+            <com.skeleton.util.customview.MaterialEditText
                 android:id="@+id/tvOrientation"
-                style="@style/edit_text"
+                style="@style/edit_text_profile"
                 android:layout_marginTop="@dimen/margin_small"
                 android:drawableEnd="@drawable/height_dropdown"
                 android:hint="@string/text_view_orientation"
-                />
-
-            <TextView
-                style="@style/line"
                 />
 
             <Button

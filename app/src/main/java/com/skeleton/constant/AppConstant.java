@@ -67,4 +67,15 @@ public interface AppConstant {
 
     //STRING MSG
     String MSG_ORIENTATION_TITLE = "Orientation";
+
+
+    //STRING PROFILE
+    String RELATIONSHIP_HISTORY = "Relationship History";
+    String EUTHNICITY = "euthnicity";
+    String RELIGION = "Religion";
+    String HEIGHT = "Height";
+    String BODY_TYPE = "Body Type";
+    String SMOKING = "Smoking";
+    String DRINKING = "Drinking";
+    String ORIENTATION = "Orientation";
 }
