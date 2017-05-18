@@ -6,19 +6,26 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.skeleton.R;
+import com.skeleton.activity.UserProfile;
 import com.skeleton.model.Profile.Response;
 import com.skeleton.retrofit.APIError;
 import com.skeleton.retrofit.ApiInterface;
+import com.skeleton.retrofit.MultipartParams;
 import com.skeleton.retrofit.ResponseResolver;
 import com.skeleton.retrofit.RestClient;
 import com.skeleton.util.Log;
 import com.skeleton.util.customview.MaterialEditText;
 
+import java.util.HashMap;
 import java.util.List;
+
+import io.paperdb.Paper;
+import okhttp3.RequestBody;
 
 /**
  * Developer: Sumit Thakur
@@ -29,11 +36,15 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
     private ImageView ivLeft, ivRight, ivCenter;
     private Response responseFinal;
     private TextView textViewBar1, textViewbar2, textViewBar3, textViewBar4, textViewBar5, textViewBar6, textViewBar7, textViewBar8;
+    private Button btnNextStep;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_complete_step1_fragment, container, false);
         init(view);
+        btnNextStep.setOnClickListener(this);
+
+
         return view;
     }
 
@@ -41,6 +52,7 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
      * @param v view
      */
     private void init(final View v) {
+        btnNextStep = (Button) v.findViewById(R.id.btnNext);
         textViewBar1 = (TextView) v.findViewById(R.id.tvBar1);
         textViewbar2 = (TextView) v.findViewById(R.id.tvBar2);
         textViewBar3 = (TextView) v.findViewById(R.id.tvBar3);
@@ -133,6 +145,8 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
                         tvOrientation, responseFinal.getData().getOrientation(), textViewBar8);
                 break;
             default:
+                updateUserProfile();
+                ((UserProfile) getActivity()).replaceFragment(new ProfileCompletenessStep2Fragment());
                 break;
         }
 
@@ -160,4 +174,35 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
         builder.create();
         builder.show();
     }
+
+    /**
+     * update user profile
+     */
+    private void updateUserProfile() {
+        HashMap<String, RequestBody> multipartParams = new MultipartParams.Builder()
+                .add(RELATIONSHIP_HISTORY, tvHistoryRelation.getText().toString().trim())
+                .add(EUTHNICITY, tvEthnicity.getText().toString().trim())
+                .add(RELIGION, tvReligion.getText().toString().trim())
+                .add(HEIGHT, tvHeight.getText().toString().trim())
+                .add(BODY_TYPE, tvBodyType.getText().toString().trim())
+                .add(SMOKING, tvSmoking.getText().toString().trim())
+                .add(DRINKING, tvDrinking.getText().toString().trim())
+                .add(ORIENTATION, tvOrientation.getText().toString().trim()).build().getMap();
+
+        ApiInterface apiInterface = RestClient.getApiInterface();
+        apiInterface.updateProfile((String) Paper.book().read(ACCESS_TOKEN), multipartParams)
+                .enqueue(new ResponseResolver<com.skeleton.model.Update.Response>(getActivity(), true, true) {
+                    @Override
+                    public void success(final com.skeleton.model.Update.Response response) {
+                        Log.e("debug", "sucess update user profile sucessfully");
+                    }
+
+                    @Override
+                    public void failure(final APIError error) {
+                        Log.e("debug", String.valueOf(error.getStatusCode()));
+                        Log.e("debug", "failure in user profile");
+                    }
+                });
+    }
+
 }

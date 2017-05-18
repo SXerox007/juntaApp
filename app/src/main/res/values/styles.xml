@@ -108,4 +108,11 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <!-- any Layout whose width height match parent -->
+    <style name="Match">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
 </resources>

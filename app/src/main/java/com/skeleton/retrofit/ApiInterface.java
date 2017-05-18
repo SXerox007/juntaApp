@@ -36,6 +36,7 @@ public interface ApiInterface {
     String USER_PROFILE_CONSTANTS = "api/profile/constants";
     String USER_IMAGE_CONSTANTS = "api/category/list";
     String USER_PROFILE_SETUP2 = "api/category/listForIDs";
+    String USER_PROFILE_SETUP1 = "api/user/updateProfile";
 
 
     /**
@@ -95,9 +96,18 @@ public interface ApiInterface {
                              @Body HashMap<String, String> map);
 
     /**
-     *
-     * @param authorization authorization
-     * @param stringArrayList  arraylist
+     * @param authorization auth
+     * @param map           map
+     * @return return user profile set up
+     */
+    @Multipart
+    @PUT(USER_PROFILE_SETUP1)
+    Call<com.skeleton.model.Update.Response> updateProfile(@Header(AUTHORIZATION) String authorization,
+                                                           @PartMap HashMap<String, RequestBody> map);
+
+    /**
+     * @param authorization   authorization
+     * @param stringArrayList arraylist
      * @return return reponse Profile
      */
     @PUT(USER_PROFILE_SETUP2)
@@ -160,5 +170,6 @@ public interface ApiInterface {
     @POST(UPDATE_LOCATION)
     Call<CommonParams> updateLocation(@Header(AUTHORIZATION) String authorization,
                                       @FieldMap HashMap<String, String> map);
+
 }
 

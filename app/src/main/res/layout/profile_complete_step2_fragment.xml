@@ -49,4 +49,12 @@
         >
     </android.support.v7.widget.RecyclerView>
 
+    <Button
+        android:id="@+id/btnNext"
+        style="@style/primary_button"
+        android:background="@drawable/button_shape"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/button_save_and_continue"
+        />
+
 </LinearLayout>

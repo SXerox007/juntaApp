@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="top"
-                android:background="@color/transparent"
+                android:background="@color/translucent"
                 android:minHeight="?attr/actionBarSize">
 
     <TextView
@@ -13,6 +13,7 @@
         android:layout_centerInParent="true"
         android:textColor="@color/white"
         android:textSize="@dimen/font_normal"
+        android:textStyle="bold"
         />
 
     <ImageView

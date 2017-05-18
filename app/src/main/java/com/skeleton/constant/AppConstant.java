@@ -70,12 +70,12 @@ public interface AppConstant {
 
 
     //STRING PROFILE
-    String RELATIONSHIP_HISTORY = "Relationship History";
-    String EUTHNICITY = "euthnicity";
-    String RELIGION = "Religion";
-    String HEIGHT = "Height";
-    String BODY_TYPE = "Body Type";
-    String SMOKING = "Smoking";
-    String DRINKING = "Drinking";
-    String ORIENTATION = "Orientation";
+    String RELATIONSHIP_HISTORY = "relationshipHistory";
+    String EUTHNICITY = "ethnicity";
+    String RELIGION = "religion";
+    String HEIGHT = "height";
+    String BODY_TYPE = "bodyType";
+    String SMOKING = "smoking";
+    String DRINKING = "drinking";
+    String ORIENTATION = "orientation";
 }
