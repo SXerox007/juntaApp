@@ -10,6 +10,16 @@ import android.widget.TextView;
 
 import com.skeleton.R;
 import com.skeleton.fragment.ProfileCompletenessStep1Fragment;
+import com.skeleton.fragment.ProfileCompletenessStep2Fragment;
+import com.skeleton.model.Response;
+import com.skeleton.retrofit.APIError;
+import com.skeleton.retrofit.ApiInterface;
+import com.skeleton.retrofit.ResponseResolver;
+import com.skeleton.retrofit.RestClient;
+
+import io.paperdb.Paper;
+
+import static com.skeleton.constant.AppConstant.ACCESS_TOKEN;
 
 /**
  * Developer: Sumit Thakur
@@ -26,6 +36,7 @@ public class UserProfileActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+        checkProfile();
 
         btnTitle = (Button) findViewById(R.id.btnToolBar);
         tvTitle = (TextView) findViewById(R.id.toolbar_top_title);
@@ -42,6 +53,30 @@ public class UserProfileActivity extends AppCompatActivity {
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.flProfileCompleteness, fragment);
         fragmentTransaction.commit();
+    }
+
+
+    /**
+     * check profile
+     */
+    private void checkProfile() {
+        ApiInterface apiInterface = RestClient.getApiInterface();
+        apiInterface.getProfile((String) Paper.book().read(ACCESS_TOKEN)).enqueue(new ResponseResolver<Response>(this, true, true) {
+
+            @Override
+            public void success(final Response response) {
+                if (response.getData().getUserDetails().getStep1CompleteOrSkip()) {
+                    replaceFragment(new ProfileCompletenessStep2Fragment());
+                } else {
+                    replaceFragment(new ProfileCompletenessStep1Fragment());
+                }
+            }
+
+            @Override
+            public void failure(final APIError error) {
+
+            }
+        });
     }
 
 }

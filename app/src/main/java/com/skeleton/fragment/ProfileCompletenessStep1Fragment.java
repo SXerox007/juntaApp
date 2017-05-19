@@ -187,7 +187,8 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
                 .add(BODY_TYPE, tvBodyType.getText().toString().trim())
                 .add(SMOKING, tvSmoking.getText().toString().trim())
                 .add(DRINKING, tvDrinking.getText().toString().trim())
-                .add(ORIENTATION, tvOrientation.getText().toString().trim()).build().getMap();
+                .add(ORIENTATION, tvOrientation.getText().toString().trim())
+                .add(STEP1_COMPLETE, true).build().getMap();
 
         ApiInterface apiInterface = RestClient.getApiInterface();
         apiInterface.updateProfile((String) Paper.book().read(ACCESS_TOKEN), multipartParams)

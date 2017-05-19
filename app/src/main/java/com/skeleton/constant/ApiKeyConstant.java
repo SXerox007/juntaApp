@@ -13,6 +13,7 @@ public interface ApiKeyConstant {
     String REQUEST_TYPE = "requestType";
     String BOOKING_ID = "bookingId";
     String NEW_NUMBER = "newNumber";
+    String STEP1_COMPLETE = "step1CompleteOrSkip";
 
     String LATITUDE = "lat";
     String LONGITUDE = "lng";
