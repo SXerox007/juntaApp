@@ -3,6 +3,7 @@ package com.skeleton.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.skeleton.R;
@@ -29,14 +30,21 @@ public class EditNumberActivity extends BaseActivity {
     private MaterialEditText metPhoneNumber;
     private Button btnSubmit, btnTool;
     private TextView tvTitleToolBar;
+    private ImageView ivBackPress;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_number);
         init();
+        ivBackPress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                commmon();
+            }
+        });
         btnTool.setVisibility(View.GONE);
-        //tvTitleToolBar.setText(EDIT_NUMBER);
+        tvTitleToolBar.setText(EDIT_NUMBER);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -50,8 +58,7 @@ public class EditNumberActivity extends BaseActivity {
                                 Log.e("debug", "edit number sucessfully");
                                 Log.e("debug", response.getData().getUserDetails().getPhoneNo());
                                 Paper.book().write(INTENT_KEY_PHONE_NUMBER, response.getData().getUserDetails().getPhoneNo());
-                                setResult(1);
-                                finish();
+                                commmon();
                             }
 
                             @Override
@@ -67,9 +74,19 @@ public class EditNumberActivity extends BaseActivity {
      * initilization
      */
     private void init() {
+        ivBackPress = (ImageView) findViewById(R.id.ivBack);
         metPhoneNumber = (MaterialEditText) findViewById(R.id.etPhoneNumber);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
-        tvTitleToolBar = (TextView) findViewById(R.id.tvTitle);
+        tvTitleToolBar = (TextView) findViewById(R.id.toolbar_top_title);
         btnTool = (Button) findViewById(R.id.btnToolBar);
     }
+
+    /**
+     * common line of code used
+     */
+    private void commmon() {
+        setResult(1);
+        finish();
+    }
+
 }

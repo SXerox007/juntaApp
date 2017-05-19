@@ -1,9 +1,11 @@
 package com.skeleton.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -28,7 +29,6 @@ import com.skeleton.retrofit.RestClient;
 import com.skeleton.util.Log;
 import com.skeleton.util.ValidateEditText;
 import com.skeleton.util.customview.MaterialEditText;
-import com.skeleton.util.dialog.CustomAlertDialog;
 import com.skeleton.util.imagepicker.ImageChooser;
 
 import java.io.File;
@@ -48,7 +48,7 @@ import okhttp3.RequestBody;
 
 public class SignUpFragment extends BaseFragment {
     private ImageView ivProfile;
-    private MaterialEditText etName, etPhoneNumber, etEmail, etDateOfBirth, etPassword, etConfirmPassword;
+    private MaterialEditText etName, etPhoneNumber, etEmail, etDateOfBirth, etPassword, etConfirmPassword, tvOrientation;
     private File file;
     private ImageChooser imageChooser;
     private ValidateEditText validateEditText = new ValidateEditText();
@@ -58,22 +58,19 @@ public class SignUpFragment extends BaseFragment {
     private RadioGroup radioGroup;
     private int mGender = VALUE_FLAG;
     private RadioButton rbMale;
-    private TextView tvOrient;
+    private com.skeleton.model.Profile.Response responseFinal;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.sign_up_fragment, container, false);
         init(view);
-        tvOrient.setOnClickListener(new View.OnClickListener() {
+        tvOrientation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                CustomAlertDialog.Builder builder = new CustomAlertDialog.Builder(getContext());
-                builder.setTitle(MSG_ORIENTATION_TITLE);
-
-                android.support.v7.app.AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+                popUp(ORIENTATION, tvOrientation, responseFinal.getData().getOrientation());
             }
         });
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(final RadioGroup group, @IdRes final int checkedId) {
@@ -131,7 +128,7 @@ public class SignUpFragment extends BaseFragment {
      * @param view view
      */
     private void init(final View view) {
-        tvOrient = (TextView) view.findViewById(R.id.etOrientation);
+        tvOrientation = (MaterialEditText) view.findViewById(R.id.tvOrientation);
         ivProfile = (ImageView) view.findViewById(R.id.iv_profile_image);
         etName = (MaterialEditText) view.findViewById(R.id.etName);
         etPhoneNumber = (MaterialEditText) view.findViewById(R.id.etPhoneNumber);
@@ -144,6 +141,22 @@ public class SignUpFragment extends BaseFragment {
         rbMale = (RadioButton) view.findViewById(R.id.radio_a);
         rbMale.isChecked();
         enableFoatingEditText(etName, etConfirmPassword, etPhoneNumber, etEmail, etDateOfBirth, etPassword);
+        ApiInterface apiInterface = RestClient.getApiInterface();
+        apiInterface.profileConstant().enqueue(new ResponseResolver<com.skeleton.model.Profile.Response>(getActivity(), true, true) {
+            @Override
+            public void success(final com.skeleton.model.Profile.Response response) {
+                responseFinal = response;
+                Log.e("debug", " in Profile 1 Sucess");
+            }
+
+            @Override
+            public void failure(final APIError error) {
+                Log.e("debug", "failure in profile 1");
+
+            }
+        });
+
+
     }
 
     @Override
@@ -274,6 +287,26 @@ public class SignUpFragment extends BaseFragment {
         for (MaterialEditText editText : materialEditText) {
             editText.setText("");
         }
+    }
+
+    /**
+     * @param title            title of popup
+     * @param materialEditText edit text for set the data
+     * @param list             list send which will be displayed
+     */
+    private void popUp(final String title, final MaterialEditText materialEditText, final List<String> list) {
+        Log.e("debug", title);
+        final CharSequence[] cs = list.toArray(new CharSequence[list.size()]);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(title)
+                .setItems(cs, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int which) {
+                        materialEditText.setText(cs[which]);
+                    }
+                });
+        builder.create();
+        builder.show();
     }
 
 

@@ -1,5 +1,6 @@
 package com.skeleton.fragment;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.skeleton.R;
+import com.skeleton.activity.HomeActivity;
 import com.skeleton.adapter.RecyclerViewAdapter;
 import com.skeleton.model.Profile2.Response;
 import com.skeleton.retrofit.APIError;
@@ -35,6 +38,8 @@ public class ProfileCompletenessStep2Fragment extends Fragment {
     private ImageView imageView;
     private RecyclerView rvRecyclerView;
     private Drawable.ConstantState mColour, mColorPrimary;
+    private Button btnSaveAndContinue;
+    private Intent intent;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -60,6 +65,13 @@ public class ProfileCompletenessStep2Fragment extends Fragment {
                     }
                 });
 
+        btnSaveAndContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                intent = new Intent(getActivity(), HomeActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 
@@ -67,6 +79,7 @@ public class ProfileCompletenessStep2Fragment extends Fragment {
      * @param view view
      */
     public void init(final View view) {
+        btnSaveAndContinue = (Button) view.findViewById(R.id.btn_save_and_continue);
         rvRecyclerView = (RecyclerView) view.findViewById(R.id.rvUserIntrest);
         tvBar1 = (TextView) view.findViewById(R.id.tvBar1);
         tvBar2 = (TextView) view.findViewById(R.id.tvBar2);

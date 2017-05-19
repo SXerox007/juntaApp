@@ -50,7 +50,7 @@
     </android.support.v7.widget.RecyclerView>
 
     <Button
-        android:id="@+id/btnNext"
+        android:id="@+id/btn_save_and_continue"
         style="@style/primary_button"
         android:background="@drawable/button_shape"
         android:backgroundTint="@color/colorPrimary"

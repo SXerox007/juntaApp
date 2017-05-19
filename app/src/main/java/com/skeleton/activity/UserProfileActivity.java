@@ -16,6 +16,7 @@ import com.skeleton.retrofit.APIError;
 import com.skeleton.retrofit.ApiInterface;
 import com.skeleton.retrofit.ResponseResolver;
 import com.skeleton.retrofit.RestClient;
+import com.skeleton.util.Log;
 
 import io.paperdb.Paper;
 
@@ -37,12 +38,10 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         checkProfile();
-
         btnTitle = (Button) findViewById(R.id.btnToolBar);
         tvTitle = (TextView) findViewById(R.id.toolbar_top_title);
         tvTitle.setText(R.string.text_view_profile_completeness);
         btnTitle.setText(R.string.button_skip);
-        replaceFragment(new ProfileCompletenessStep1Fragment());
     }
 
     /**
@@ -62,19 +61,22 @@ public class UserProfileActivity extends AppCompatActivity {
     private void checkProfile() {
         ApiInterface apiInterface = RestClient.getApiInterface();
         apiInterface.getProfile((String) Paper.book().read(ACCESS_TOKEN)).enqueue(new ResponseResolver<Response>(this, true, true) {
-
             @Override
             public void success(final Response response) {
-                if (response.getData().getUserDetails().getStep1CompleteOrSkip()) {
-                    replaceFragment(new ProfileCompletenessStep2Fragment());
+                if ("200".equals(response.getStatusCode().toString())) {
+                    if (response.getData().getUserDetails().getStep1CompleteOrSkip()) {
+                        replaceFragment(new ProfileCompletenessStep2Fragment());
+                    } else {
+                        replaceFragment(new ProfileCompletenessStep1Fragment());
+                    }
                 } else {
-                    replaceFragment(new ProfileCompletenessStep1Fragment());
+                    Log.e("debug", "profile check in sucess.(failed)");
                 }
             }
 
             @Override
             public void failure(final APIError error) {
-
+                Log.e("debug", "profile check in failure");
             }
         });
     }

@@ -17,7 +17,7 @@
         />
 
     <ImageView
-        android:id="@+id/ivDrawer"
+        android:id="@+id/ivBack"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/button_height_normal"
         android:layout_alignParentLeft="true"
@@ -32,7 +32,7 @@
         android:id="@+id/btnToolBar"
         android:layout_width="@dimen/button_height_tall"
         android:layout_height="@dimen/button_height_small"
-        android:layout_alignBottom="@+id/ivDrawer"
+        android:layout_alignBottom="@+id/ivBack"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/margin_normal"
         android:background="@drawable/button_shape"
