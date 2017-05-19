@@ -249,7 +249,7 @@ public class SignUpFragment extends BaseFragment {
                 .add(KEY_FRAGMENT_DEVICE_TOKEN, VALUE_RAGMENT_DEVICE_TOKEN)
                 .add(KEY_FRAGMENT_APP_VERSION, VALUE_FRAGMENT_APP_VERSION)
                 .add(KEY_FRAGMENT_GENDER, mGender)
-                .add(KEY_FRAGMENT_ORIENTATION, ORIENTAATION)
+                .add(KEY_FRAGMENT_ORIENTATION, tvOrientation.getText().toString().trim())
                 .add(KEY_FRAGMENT_PROFILE_PIC, file).build().getMap();
 
         ApiInterface apiInterface = RestClient.getApiInterface();
