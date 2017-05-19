@@ -60,7 +60,6 @@ public class ProfileCompletenessStep2Fragment extends Fragment {
                     }
                 });
 
-
         return view;
     }
 

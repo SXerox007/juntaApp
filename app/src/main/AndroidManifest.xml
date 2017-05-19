@@ -70,9 +70,11 @@
         </activity>
         <activity android:name=".activity.OTPActivity">
         </activity>
-        <activity android:name=".activity.UserProfile">
+        <activity android:name=".activity.UserProfileActivity">
         </activity>
         <activity android:name=".activity.HomeActivity">
+        </activity>
+        <activity android:name=".activity.EditNumberActivity">
         </activity>
     </application>
 

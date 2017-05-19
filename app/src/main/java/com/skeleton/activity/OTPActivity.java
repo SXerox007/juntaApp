@@ -43,6 +43,7 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
         btnTool.setVisibility(View.GONE);
         btnverified.setOnClickListener(this);
         btnResend.setOnClickListener(this);
+        btnEditNo.setOnClickListener(this);
     }
 
 
@@ -120,12 +121,15 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
 
                     @Override
                     public void failure(final APIError error) {
+                        Log.e("debug", String.valueOf(error.getStatusCode()));
                         Log.e("debug", "OTP resend in Failure");
                     }
                 });
 
                 break;
             case R.id.btnEditNumber:
+                intent = new Intent(OTPActivity.this, EditNumberActivity.class);
+                startActivityForResult(intent, REQUEST_CODE);
                 break;
             default:
                 break;
@@ -150,11 +154,11 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
             public void success(final Response response) {
                 if ("200".equals(response.getStatusCode())) {
                     Log.e("debug", "OTP verifed");
-                    intent = new Intent(OTPActivity.this, UserProfile.class);
+                    intent = new Intent(OTPActivity.this, UserProfileActivity.class);
                     startActivity(intent);
                 } else {
                     Log.e("debug", "In sucess OTP not verified ");
-                    intent = new Intent(OTPActivity.this, UserProfile.class);
+                    intent = new Intent(OTPActivity.this, UserProfileActivity.class);
                     startActivity(intent);
                 }
             }
@@ -173,6 +177,12 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
         for (MaterialEditText editText : materialEditText) {
             editText.setText("");
         }
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        tvPhoneNumber.setText(Paper.book().read(INTENT_KEY_COUNTRY_CODE) + "-" + Paper.book().read(INTENT_KEY_PHONE_NUMBER));
+
     }
 
 }

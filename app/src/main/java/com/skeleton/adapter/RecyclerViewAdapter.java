@@ -12,6 +12,7 @@ import com.skeleton.R;
 import com.skeleton.constant.AppConstant;
 import com.skeleton.fragment.ProfileCompletenessStep2Fragment;
 import com.skeleton.model.Profile2.Categories;
+import com.skeleton.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +21,11 @@ import java.util.List;
  * Developer: Sumit Thakur
  * Dated: 16-05-2017.
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-    private static int count = 1;
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements AppConstant {
+    private static int count = 0;
     private Context context;
     private List<Categories> categories;
-    private ArrayList<String> stringArrayList;
+    private ArrayList<String> stringArrayList = new ArrayList<>();
     private ProfileCompletenessStep2Fragment profileCompletenessStep2Fragment;
 
 
@@ -53,9 +54,47 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(final RecyclerViewAdapter.ViewHolder holder, final int position) {
-        Categories obj = categories.get(position);
+        final Categories obj = categories.get(position);
         holder.mText.setText(obj.getName());
+        if (obj.getIscheck()) {
+            holder.ivcheck.setImageResource(R.drawable.check_mark);
+            holder.ivBlur.setImageResource(R.color.translucent);
+        } else {
+            holder.ivcheck.setImageDrawable(null);
+            holder.ivBlur.setImageDrawable(null);
+        }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                if (obj.getIscheck()) {
+                    obj.setIscheck(false);
+                    count--;
+                    profileCompletenessStep2Fragment.barUnfill();
+                    stringArrayList.remove(obj.get_id());
+                } else {
+                    if (count == 5) {
+                        Log.e("debug", "Sucess100");
+                    } else {
+                        obj.setIscheck(true);
+                        count++;
+                        profileCompletenessStep2Fragment.barFill();
+                        stringArrayList.add(obj.get_id());
+                    }
+                }
+                notifyDataSetChanged();
+            }
+        });
+
+
     }
+
+    /**
+     * @return return arraylist create in adapter
+     */
+    public ArrayList<String> parseArrayList() {
+        return stringArrayList;
+    }
+
 
     @Override
     public int getItemCount() {
@@ -65,7 +104,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     /**
      * view holder
      */
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, AppConstant {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mText;
         private ImageView ivImage, ivcheck, ivBlur;
 
@@ -79,37 +118,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             ivImage = (ImageView) itemView.findViewById(R.id.iv_image);
             ivcheck = (ImageView) itemView.findViewById(R.id.iv_check_mark);
             ivBlur = (ImageView) itemView.findViewById(R.id.iv_image_blur);
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(final View v) {
-            int pos = getAdapterPosition();
-            if (count < VALUE_IMAGE_COUNTER) {
-                if (ivcheck.getDrawable() == null) {
-                    ivcheck.setImageResource(R.drawable.check_mark);
-                    ivBlur.setImageResource(R.color.translucent);
-                    profileCompletenessStep2Fragment.barFill();
-                    //stringArrayList.add();
-                    count++;
-                } else {
-                    ivcheck.setImageDrawable(null);
-                    ivBlur.setImageDrawable(null);
-                    //int a = stringArrayList.indexOf(){
-                    //   return
-                    //}
-                    profileCompletenessStep2Fragment.barUnfill();
-                    count--;
-                }
-            } else {
-                if (ivcheck.getDrawable() != null) {
-                    ivcheck.setImageDrawable(null);
-                    ivBlur.setImageDrawable(null);
-                    profileCompletenessStep2Fragment.barUnfill();
-                    count--;
-                }
-            }
-        }
 
     }
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.skeleton.activity.EditNumberActivity"
+    >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sign_up_screen_image"/>
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/custom_tool_bar"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/white"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_large"
+            android:orientation="horizontal"
+            >
+
+            <com.skeleton.util.customview.MaterialEditText
+                style="@style/edit_text"
+                android:layout_weight="4"
+                android:editable="false"
+                android:text="@string/edit_text_phone_start"
+                android:textSize="@dimen/font_xlarge"
+                android:textStyle="bold"
+                />
+
+            <com.skeleton.util.customview.MaterialEditText
+                android:id="@+id/etPhoneNumber"
+                style="@style/edit_text"
+                android:layout_weight="1"
+                android:hint="@string/edit_text_phone_number"
+                android:inputType="phone"
+                android:maxLength="10"
+                />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSubmit"
+            style="@style/primary_button"
+            android:background="@drawable/button_shape"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/button_submit"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.skeleton.R;
-import com.skeleton.activity.UserProfile;
+import com.skeleton.activity.UserProfileActivity;
 import com.skeleton.model.Response;
 import com.skeleton.retrofit.APIError;
 import com.skeleton.retrofit.ApiInterface;
@@ -91,7 +91,7 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void success(final Response response) {
                 Paper.book().write(ACCESS_TOKEN, ACESS_START + response.getData().getAccessToken());
-                Intent intent = new Intent(getContext(), UserProfile.class);
+                Intent intent = new Intent(getContext(), UserProfileActivity.class);
                 Log.e("debug", "sucess signIn");
                 clearFields(etEmail, etPassword);
                 startActivity(intent);

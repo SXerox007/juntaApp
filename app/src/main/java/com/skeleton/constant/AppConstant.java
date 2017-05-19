@@ -7,6 +7,7 @@ package com.skeleton.constant;
 
 public interface AppConstant {
     String DEVICE_TYPE = "ANDROID";
+    int REQUEST_CODE = 1;
 
     //Intent Filter
     String NOTIFICATION_RECEIVED = "notification_received";
@@ -78,4 +79,8 @@ public interface AppConstant {
     String SMOKING = "smoking";
     String DRINKING = "drinking";
     String ORIENTATION = "orientation";
+
+
+    //Title
+    String EDIT_NUMBER = "Edit Number";
 }

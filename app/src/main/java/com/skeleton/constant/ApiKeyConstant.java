@@ -12,6 +12,8 @@ public interface ApiKeyConstant {
     String AUTHORIZATION = "authorization";
     String REQUEST_TYPE = "requestType";
     String BOOKING_ID = "bookingId";
+    String NEW_NUMBER = "newNumber";
+
     String LATITUDE = "lat";
     String LONGITUDE = "lng";
     String TIMESTAMP = "timestamp";

@@ -3,7 +3,6 @@ package com.skeleton.retrofit;
 
 import com.skeleton.model.Response;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import okhttp3.RequestBody;
@@ -112,7 +111,7 @@ public interface ApiInterface {
      */
     @PUT(USER_PROFILE_SETUP2)
     Call<com.skeleton.model.Profile2.Response> listProfile2(@Header(AUTHORIZATION) String authorization,
-                                                            @Body ArrayList<String> stringArrayList);
+                                                            @FieldMap HashMap<String, String> stringArrayList);
 
 //    /**
 //     * @param map

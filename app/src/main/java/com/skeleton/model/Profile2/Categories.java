@@ -23,6 +23,22 @@ public class Categories {
     @SerializedName("name")
     private String name;
 
+    private boolean ischeck;
+
+    /**
+     * @return ischecked
+     */
+    public boolean getIscheck() {
+        return ischeck;
+    }
+
+    /**
+     * @param ischeck ischeck
+     */
+    public void setIscheck(final boolean ischeck) {
+        this.ischeck = ischeck;
+    }
+
     /**
      * @return id
      */

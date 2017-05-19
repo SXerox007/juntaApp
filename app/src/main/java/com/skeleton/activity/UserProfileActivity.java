@@ -15,7 +15,7 @@ import com.skeleton.fragment.ProfileCompletenessStep1Fragment;
  * Developer: Sumit Thakur
  * Dated: 15-05-2017.
  */
-public class UserProfile extends AppCompatActivity {
+public class UserProfileActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;

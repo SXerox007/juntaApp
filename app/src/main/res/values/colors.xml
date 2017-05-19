@@ -16,6 +16,7 @@
     <color name="transparent">#0000</color>
     <color name="fake_black">#4a4a4a</color>
     <color name="translucent">#B33a4245</color>
+    <color name="black_drawer">#222222</color>
 
     <color name="button_color_normal">@color/colorPrimary</color>
     <color name="button_color_pressed">@color/colorAccent</color>

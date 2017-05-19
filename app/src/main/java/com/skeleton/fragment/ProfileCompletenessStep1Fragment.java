@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.skeleton.R;
-import com.skeleton.activity.UserProfile;
+import com.skeleton.activity.UserProfileActivity;
 import com.skeleton.model.Profile.Response;
 import com.skeleton.retrofit.APIError;
 import com.skeleton.retrofit.ApiInterface;
@@ -146,7 +146,7 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
                 break;
             default:
                 updateUserProfile();
-                ((UserProfile) getActivity()).replaceFragment(new ProfileCompletenessStep2Fragment());
+                ((UserProfileActivity) getActivity()).replaceFragment(new ProfileCompletenessStep2Fragment());
                 break;
         }
 
