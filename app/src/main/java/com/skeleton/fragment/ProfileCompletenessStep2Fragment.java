@@ -3,7 +3,6 @@ package com.skeleton.fragment;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,36 +14,47 @@ import android.widget.TextView;
 
 import com.skeleton.R;
 import com.skeleton.activity.HomeActivity;
+import com.skeleton.activity.UserProfileActivity;
 import com.skeleton.adapter.RecyclerViewAdapter;
 import com.skeleton.model.Profile2.Response;
 import com.skeleton.retrofit.APIError;
 import com.skeleton.retrofit.ApiInterface;
+import com.skeleton.retrofit.MultipartParams;
 import com.skeleton.retrofit.ResponseResolver;
 import com.skeleton.retrofit.RestClient;
 import com.skeleton.util.Log;
 
-import io.paperdb.Paper;
+import java.util.HashMap;
 
-import static com.skeleton.constant.AppConstant.ACCESS_TOKEN;
-import static com.skeleton.constant.AppConstant.KEY_INTEREST;
+import io.paperdb.Paper;
+import okhttp3.RequestBody;
 
 /**
  * Developer: Sumit Thakur
  * Dated: 16-05-2017.
  */
-public class ProfileCompletenessStep2Fragment extends Fragment {
+public class ProfileCompletenessStep2Fragment extends BaseFragment {
 
     private TextView tvBar1, tvBar2, tvBar3, tvBar4, tvBar5;
     private ImageView imageView;
     private RecyclerView rvRecyclerView;
     private Drawable.ConstantState mColour, mColorPrimary;
-    private Button btnSaveAndContinue;
+    private Button btnSaveAndContinue, btnSkipPress;
     private Intent intent;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_complete_step2_fragment, container, false);
         init(view);
+        btnSkipPress = ((UserProfileActivity) getActivity()).btnSkipPressed();
+        btnSkipPress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                updateUserProfile();
+                homeStart();
+            }
+        });
+
         ApiInterface apiInterface = RestClient.getApiInterface();
         apiInterface.profileImageSet((String) Paper.book().read(ACCESS_TOKEN), KEY_INTEREST)
                 .enqueue(new ResponseResolver<Response>(getActivity(), true, true) {
@@ -68,12 +78,20 @@ public class ProfileCompletenessStep2Fragment extends Fragment {
         btnSaveAndContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                intent = new Intent(getActivity(), HomeActivity.class);
-                startActivity(intent);
+                homeStart();
             }
         });
         return view;
     }
+
+    /**
+     * home start
+     */
+    private void homeStart() {
+        intent = new Intent(getActivity(), HomeActivity.class);
+        startActivity(intent);
+    }
+
 
     /**
      * @param view view
@@ -123,6 +141,38 @@ public class ProfileCompletenessStep2Fragment extends Fragment {
         } else {
             tvBar1.setBackgroundResource(R.color.gray_light);
         }
+    }
+
+
+    /**
+     * update user profile
+     */
+    private void updateUserProfile() {
+
+        HashMap<String, RequestBody> multipartParams = new MultipartParams.Builder()
+                .add(STEP1_COMPLETE, true).build().getMap();
+        apiCall(multipartParams);
+    }
+
+
+    /**
+     * @param multipartParams hash map
+     */
+    private void apiCall(final HashMap<String, RequestBody> multipartParams) {
+        ApiInterface apiInterface = RestClient.getApiInterface();
+        apiInterface.updateProfile((String) Paper.book().read(ACCESS_TOKEN), multipartParams)
+                .enqueue(new ResponseResolver<com.skeleton.model.Update.Response>(getActivity(), true, true) {
+                    @Override
+                    public void success(final com.skeleton.model.Update.Response response) {
+                        Log.e("debug", "sucess update user profile sucessfully");
+                    }
+
+                    @Override
+                    public void failure(final APIError error) {
+                        Log.e("debug", String.valueOf(error.getStatusCode()));
+                        Log.e("debug", "failure in user profile");
+                    }
+                });
     }
 
 }
