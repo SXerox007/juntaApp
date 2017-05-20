@@ -1,5 +1,6 @@
 package com.skeleton.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -32,6 +33,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private FragmentTransaction fragmentTransaction;
     private TextView tvTitle;
     private Button btnSkip;
+    private Intent intent;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -73,7 +75,11 @@ public class UserProfileActivity extends AppCompatActivity {
             public void success(final Response response) {
                 if ("200".equals(response.getStatusCode().toString())) {
                     if (response.getData().getUserDetails().getStep1CompleteOrSkip()) {
-                        replaceFragment(new ProfileCompletenessStep2Fragment());
+                        if (response.getData().getUserDetails().getStep2CompleteOrSkip()) {
+                            homeStart();
+                        } else {
+                            replaceFragment(new ProfileCompletenessStep2Fragment());
+                        }
                     } else {
                         replaceFragment(new ProfileCompletenessStep1Fragment());
                     }
@@ -87,6 +93,15 @@ public class UserProfileActivity extends AppCompatActivity {
                 Log.e("debug", "profile check in failure");
             }
         });
+    }
+
+
+    /**
+     * home start
+     */
+    private void homeStart() {
+        intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 
 }
