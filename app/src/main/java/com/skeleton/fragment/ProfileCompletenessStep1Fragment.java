@@ -36,15 +36,15 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
     private ImageView ivLeft, ivRight, ivCenter;
     private Response responseFinal;
     private TextView textViewBar1, textViewbar2, textViewBar3, textViewBar4, textViewBar5, textViewBar6, textViewBar7, textViewBar8;
-    private Button btnNextStep;
+    private Button btnNextStep, btnSkipPress;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_complete_step1_fragment, container, false);
         init(view);
         btnNextStep.setOnClickListener(this);
-
-
+        btnSkipPress = ((UserProfileActivity) getActivity()).btnSkipPressed();
+        btnSkipPress.setOnClickListener(this);
         return view;
     }
 
@@ -144,14 +144,26 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
                 popUp(ORIENTATION,
                         tvOrientation, responseFinal.getData().getOrientation(), textViewBar8);
                 break;
+            case R.id.btnNext:
+                updateUserProfile(0);
+                replaceFragment();
+                break;
             default:
-                updateUserProfile();
-                ((UserProfileActivity) getActivity()).replaceFragment(new ProfileCompletenessStep2Fragment());
+                updateUserProfile(1);
+                replaceFragment();
                 break;
         }
 
 
     }
+
+    /**
+     * replace fragment
+     */
+    private void replaceFragment() {
+        ((UserProfileActivity) getActivity()).replaceFragment(new ProfileCompletenessStep2Fragment());
+    }
+
 
     /**
      * @param title            title
@@ -176,20 +188,33 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
     }
 
     /**
-     * update user profile
+     * @param value value check which will execute
      */
-    private void updateUserProfile() {
-        HashMap<String, RequestBody> multipartParams = new MultipartParams.Builder()
-                .add(RELATIONSHIP_HISTORY, tvHistoryRelation.getText().toString().trim())
-                .add(EUTHNICITY, tvEthnicity.getText().toString().trim())
-                .add(RELIGION, tvReligion.getText().toString().trim())
-                .add(HEIGHT, tvHeight.getText().toString().trim())
-                .add(BODY_TYPE, tvBodyType.getText().toString().trim())
-                .add(SMOKING, tvSmoking.getText().toString().trim())
-                .add(DRINKING, tvDrinking.getText().toString().trim())
-                .add(ORIENTATION, tvOrientation.getText().toString().trim())
-                .add(STEP1_COMPLETE, true).build().getMap();
+    private void updateUserProfile(final int value) {
+        if (value == 0) {
+            HashMap<String, RequestBody> multipartParams = new MultipartParams.Builder()
+                    .add(RELATIONSHIP_HISTORY, tvHistoryRelation.getText().toString().trim())
+                    .add(EUTHNICITY, tvEthnicity.getText().toString().trim())
+                    .add(RELIGION, tvReligion.getText().toString().trim())
+                    .add(HEIGHT, tvHeight.getText().toString().trim())
+                    .add(BODY_TYPE, tvBodyType.getText().toString().trim())
+                    .add(SMOKING, tvSmoking.getText().toString().trim())
+                    .add(DRINKING, tvDrinking.getText().toString().trim())
+                    .add(ORIENTATION, tvOrientation.getText().toString().trim())
+                    .add(STEP1_COMPLETE, true).build().getMap();
+            apiCall(multipartParams);
+        } else {
+            HashMap<String, RequestBody> multipartParams = new MultipartParams.Builder()
+                    .add(STEP1_COMPLETE, true).build().getMap();
+            apiCall(multipartParams);
+        }
+    }
 
+
+    /**
+     * @param multipartParams hash map
+     */
+    private void apiCall(final HashMap<String, RequestBody> multipartParams) {
         ApiInterface apiInterface = RestClient.getApiInterface();
         apiInterface.updateProfile((String) Paper.book().read(ACCESS_TOKEN), multipartParams)
                 .enqueue(new ResponseResolver<com.skeleton.model.Update.Response>(getActivity(), true, true) {
@@ -205,5 +230,6 @@ public class ProfileCompletenessStep1Fragment extends BaseFragment implements Vi
                     }
                 });
     }
+
 
 }
