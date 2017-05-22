@@ -25,12 +25,15 @@ import com.skeleton.util.dialog.CustomAlertDialog;
 
 import io.paperdb.Paper;
 
+import static bolts.Task.delay;
+
 /**
  * Landing Page of the App
  */
 public class SplashActivity extends BaseActivity implements FCMTokenInterface {
     private static final String TAG = SplashActivity.class.getName();
     private Dialog mDialog;
+    private Intent intent;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -82,6 +85,8 @@ public class SplashActivity extends BaseActivity implements FCMTokenInterface {
         } else if (requestCode == REQ_CODE_PLAY_SERVICES_RESOLUTION
                 && resultCode == Activity.RESULT_OK) {
             init();
+        } else if (requestCode == REQ_CODE_LOGIN && resultCode == RESULT_OK) {
+            callApiCheck();
         }
     }
 
@@ -102,12 +107,13 @@ public class SplashActivity extends BaseActivity implements FCMTokenInterface {
                 }
                 mDialog = new CustomAlertDialog.Builder(SplashActivity.this)
                         .setMessage(R.string.error_device_not_supported)
-                        .setPositiveButton(R.string.text_ok, new CustomAlertDialog.CustomDialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick() {
-                                finish();
-                            }
-                        })
+                        .setPositiveButton(R.string.text_ok,
+                                new CustomAlertDialog.CustomDialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick() {
+                                        finish();
+                                    }
+                                })
                         .show();
             }
             return false;
@@ -121,38 +127,57 @@ public class SplashActivity extends BaseActivity implements FCMTokenInterface {
 
         if (Paper.book().read(ACCESS_TOKEN) != null) {
             Log.e("debug", "OTP Activity");
-            ApiInterface apiInterface = RestClient.getApiInterface();
-            apiInterface.getProfile((String) Paper.book().read(ACCESS_TOKEN)).enqueue(new ResponseResolver<Response>(this, true, true) {
-                @Override
-                public void success(final Response commonResponse) {
-                    if ("200".equals(String.valueOf(commonResponse.getStatusCode()))) {
-                        Log.e("debug", "sucess Acess Token");
-                        if (commonResponse.getData().getUserDetails().getPhoneVerified()) {
-                            Log.e("debug", "Phone Verifed");
-                            startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
-                            finish();
-                        } else {
-                            Log.e("debug", "Phone Not Verifed");
-                            startActivity(new Intent(getApplicationContext(), OTPActivity.class));
-                            finish();
-                        }
-                    } else {
-                        Log.e("debug", String.valueOf(commonResponse.getStatusCode()));
-                        Log.e("debug", "Error in Sucess");
-                    }
-                }
-
-                @Override
-                public void failure(final APIError error) {
-                    Log.e("debug", "Failure");
-                }
-            });
+            //change code
+            callApiCheck();
+            //end change code
         } else {
             Log.e("debug", "LoginActivity");
             //Log.e("debug", (String) Paper.book().read(ACCESS_TOKEN));
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
+            delay(DELAY_CODE);
+            intentLoginActivity();
+
         }
+    }
+
+
+    /**
+     * check api call which activity next activate
+     */
+    private void callApiCheck() {
+        ApiInterface apiInterface = RestClient.getApiInterface();
+        apiInterface.getProfile((String) Paper.book().read(ACCESS_TOKEN)).enqueue(new ResponseResolver<Response>(this, true, true) {
+            @Override
+            public void success(final Response commonResponse) {
+                if ("200".equals(String.valueOf(commonResponse.getStatusCode()))) {
+                    Log.e("debug", "sucess Acess Token");
+                    if (commonResponse.getData().getUserDetails().getPhoneVerified()) {
+                        Log.e("debug", "Phone Verifed");
+                        startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
+                        finish();
+                    } else {
+                        Log.e("debug", "Phone Not Verifed");
+                        startActivity(new Intent(getApplicationContext(), OTPActivity.class));
+                        finish();
+                    }
+                } else {
+                    Log.e("debug", String.valueOf(commonResponse.getStatusCode()));
+                    Log.e("debug", "Error in Sucess");
+                }
+            }
+
+            @Override
+            public void failure(final APIError error) {
+                Log.e("debug", "Failure");
+            }
+        });
+    }
+
+    /**
+     * intent Login Activity
+     */
+    private void intentLoginActivity() {
+        intent = new Intent(SplashActivity.this, LoginActivity.class);
+        startActivityForResult(intent, REQ_CODE_LOGIN);
     }
 
     @Override
@@ -180,7 +205,7 @@ public class SplashActivity extends BaseActivity implements FCMTokenInterface {
             return true;
         }
         if (!Settings.canDrawOverlays(this)) {
-            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+            intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                     Uri.parse("package:" + getPackageName()));
             startActivityForResult(intent, REQ_CODE_SCREEN_OVERLAY);
             return false;
@@ -188,5 +213,6 @@ public class SplashActivity extends BaseActivity implements FCMTokenInterface {
             return true;
         }
     }
+
 
 }

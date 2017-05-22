@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.kbeanie.multipicker.api.entity.ChosenImage;
 import com.skeleton.R;
-import com.skeleton.activity.OTPActivity;
+import com.skeleton.activity.LoginActivity;
 import com.skeleton.model.Response;
 import com.skeleton.retrofit.APIError;
 import com.skeleton.retrofit.ApiInterface;
@@ -267,8 +267,7 @@ public class SignUpFragment extends BaseFragment {
                     Log.e("debug", ACESS_START + response.getData().getAccessToken());
                     Log.e("debug", response.getData().getUserDetails().getPhoneNo());
                     Log.e("debug", response.getData().getUserDetails().getCountryCode());
-                    Intent intent = new Intent(getContext(), OTPActivity.class);
-                    startActivity(intent);
+                    ((LoginActivity) getActivity()).checkSucessFromFragment(true);
                 }
             }
 

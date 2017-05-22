@@ -7,7 +7,10 @@ package com.skeleton.constant;
 
 public interface AppConstant {
     String DEVICE_TYPE = "ANDROID";
+    //Request code
     int REQUEST_CODE = 1;
+
+    int DELAY_CODE = 2000;
 
     //Intent Filter
     String NOTIFICATION_RECEIVED = "notification_received";
@@ -19,6 +22,7 @@ public interface AppConstant {
     int REQ_CODE_DEFAULT_SETTINGS = 16061;
     int REQ_CODE_PLAY_SERVICES_RESOLUTION = 16061;
     int REQ_CODE_SCREEN_OVERLAY = 10101;
+    int REQ_CODE_LOGIN = 2;
 
     //USER_SIGNUP_KEYS
     String COUNTRY_CODE = "+91";
@@ -79,7 +83,6 @@ public interface AppConstant {
     String SMOKING = "smoking";
     String DRINKING = "drinking";
     String ORIENTATION = "orientation";
-
 
 
     //Title

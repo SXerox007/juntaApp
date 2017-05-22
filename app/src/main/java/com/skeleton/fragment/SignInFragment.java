@@ -1,6 +1,5 @@
 package com.skeleton.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.skeleton.R;
-import com.skeleton.activity.UserProfileActivity;
+import com.skeleton.activity.LoginActivity;
 import com.skeleton.model.Response;
 import com.skeleton.retrofit.APIError;
 import com.skeleton.retrofit.ApiInterface;
@@ -92,10 +91,9 @@ public class SignInFragment extends BaseFragment implements View.OnClickListener
             public void success(final Response response) {
                 Paper.book().write(ACCESS_TOKEN, ACESS_START + response.getData().getAccessToken());
                 Log.e("debug", String.valueOf(response.getData().getAccessToken()));
-                Intent intent = new Intent(getContext(), UserProfileActivity.class);
+                ((LoginActivity) getActivity()).checkSucessFromFragment(true);
                 Log.e("debug", "sucess signIn");
                 clearFields(etEmail, etPassword);
-                startActivity(intent);
             }
 
             @Override

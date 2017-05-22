@@ -14,6 +14,8 @@ public interface ApiKeyConstant {
     String BOOKING_ID = "bookingId";
     String NEW_NUMBER = "newNumber";
     String STEP1_COMPLETE = "step1CompleteOrSkip";
+    String STEP2_COMPLETE = "step2CompleteOrSkip";
+
 
     String LATITUDE = "lat";
     String LONGITUDE = "lng";

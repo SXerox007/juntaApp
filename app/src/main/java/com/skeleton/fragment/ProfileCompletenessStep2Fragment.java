@@ -150,7 +150,7 @@ public class ProfileCompletenessStep2Fragment extends BaseFragment {
     private void updateUserProfile() {
 
         HashMap<String, RequestBody> multipartParams = new MultipartParams.Builder()
-                .add(STEP1_COMPLETE, true).build().getMap();
+                .add(STEP2_COMPLETE, true).build().getMap();
         apiCall(multipartParams);
     }
 
