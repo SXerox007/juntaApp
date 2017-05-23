@@ -27,9 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
-        PagerAdapter pagerAdapter = new com.skeleton.adapter.PagerAdapter(getSupportFragmentManager(), fragments);
-        viewPager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     /**
@@ -37,10 +35,15 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void init() {
         viewPager = (ViewPager) findViewById(R.id.vpSwipe);
+        tabLayout = (TabLayout) findViewById(R.id.tltablayout);
+
         fragments = new ArrayList<>();
         fragments.add(new SignUpFragment());
         fragments.add(new SignInFragment());
-        tabLayout = (TabLayout) findViewById(R.id.tltablayout);
+
+        PagerAdapter pagerAdapter = new com.skeleton.adapter.PagerAdapter(getSupportFragmentManager(), fragments);
+        viewPager.setAdapter(pagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     /**
@@ -49,10 +52,8 @@ public class LoginActivity extends AppCompatActivity {
     public void checkSucessFromFragment(final boolean value) {
         if (value) {
             setResult(RESULT_OK);
-            finish();
         } else {
             setResult(RESULT_CANCELED);
-            finish();
         }
     }
 

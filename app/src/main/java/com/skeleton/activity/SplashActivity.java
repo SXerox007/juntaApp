@@ -43,7 +43,7 @@ public class SplashActivity extends BaseActivity implements FCMTokenInterface {
     }
 
     /**
-     *
+     * initilization
      */
     private synchronized void init() {
         if (!Util.isNetworkAvailable(SplashActivity.this)) {
@@ -124,17 +124,23 @@ public class SplashActivity extends BaseActivity implements FCMTokenInterface {
     @Override
     public void onTokenReceived(final String token) {
         //Log.e("debug", token);
+        checkToken();
 
+    }
+
+
+    /**
+     * check token
+     */
+    public void checkToken() {
         if (Paper.book().read(ACCESS_TOKEN) != null) {
             Log.e("debug", "OTP Activity");
-            //change code
             callApiCheck();
-            //end change code
         } else {
             Log.e("debug", "LoginActivity");
             //Log.e("debug", (String) Paper.book().read(ACCESS_TOKEN));
             delay(DELAY_CODE);
-            intentLoginActivity();
+            startLoginActivity();
 
         }
     }
@@ -175,7 +181,7 @@ public class SplashActivity extends BaseActivity implements FCMTokenInterface {
     /**
      * intent Login Activity
      */
-    private void intentLoginActivity() {
+    private void startLoginActivity() {
         intent = new Intent(SplashActivity.this, LoginActivity.class);
         startActivityForResult(intent, REQ_CODE_LOGIN);
     }

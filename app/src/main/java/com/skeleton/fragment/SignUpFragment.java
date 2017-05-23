@@ -48,7 +48,8 @@ import okhttp3.RequestBody;
 
 public class SignUpFragment extends BaseFragment {
     private ImageView ivProfile;
-    private MaterialEditText etName, etPhoneNumber, etEmail, etDateOfBirth, etPassword, etConfirmPassword, tvOrientation;
+    private MaterialEditText etName, etPhoneNumber, etEmail, etDateOfBirth,
+            etPassword, etConfirmPassword, tvOrientation;
     private File file;
     private ImageChooser imageChooser;
     private ValidateEditText validateEditText = new ValidateEditText();
@@ -141,20 +142,20 @@ public class SignUpFragment extends BaseFragment {
         rbMale = (RadioButton) view.findViewById(R.id.radio_a);
         rbMale.isChecked();
         enableFoatingEditText(etName, etConfirmPassword, etPhoneNumber, etEmail, etDateOfBirth, etPassword);
-        ApiInterface apiInterface = RestClient.getApiInterface();
-        apiInterface.profileConstant().enqueue(new ResponseResolver<com.skeleton.model.Profile.Response>(getActivity(), true, true) {
-            @Override
-            public void success(final com.skeleton.model.Profile.Response response) {
-                responseFinal = response;
-                Log.e("debug", " in Profile 1 Sucess");
-            }
+        RestClient.getApiInterface().profileConstant()
+                .enqueue(new ResponseResolver<com.skeleton.model.Profile.Response>(getActivity(), true, true) {
+                    @Override
+                    public void success(final com.skeleton.model.Profile.Response response) {
+                        responseFinal = response;
+                        Log.e("debug", " in Profile 1 Sucess");
+                    }
 
-            @Override
-            public void failure(final APIError error) {
-                Log.e("debug", "failure in profile 1");
+                    @Override
+                    public void failure(final APIError error) {
+                        Log.e("debug", "failure in profile 1");
 
-            }
-        });
+                    }
+                });
 
 
     }
@@ -196,11 +197,11 @@ public class SignUpFragment extends BaseFragment {
      */
     private void validation() {
         if (ValidateEditText.checkEmail(etEmail)
-                && validateEditText.checkPassword(etPassword, false)
-                && validateEditText.checkPassword(etConfirmPassword, true)
-                && validateEditText.checkName(etName, true)
-                && validateEditText.checkPhoneNumber(etPhoneNumber)
-                && validateEditText.comparePassword(etPassword, etConfirmPassword)
+                && ValidateEditText.checkPassword(etPassword, false)
+                && ValidateEditText.checkPassword(etConfirmPassword, true)
+                && ValidateEditText.checkName(etName, true)
+                && ValidateEditText.checkPhoneNumber(etPhoneNumber)
+                && ValidateEditText.comparePassword(etPassword, etConfirmPassword)
                 && validateEditText.genericEmpty(etDateOfBirth, getString(R.string.error_date))) {
             flag = checkDOB(etDateOfBirth);
 

@@ -66,16 +66,11 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.LoginActivity">
-        </activity>
-        <activity android:name=".activity.OTPActivity">
-        </activity>
-        <activity android:name=".activity.UserProfileActivity">
-        </activity>
-        <activity android:name=".activity.HomeActivity">
-        </activity>
-        <activity android:name=".activity.EditNumberActivity">
-        </activity>
+        <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.OTPActivity"/>
+        <activity android:name=".activity.UserProfileActivity"/>
+        <activity android:name=".activity.HomeActivity"/>
+        <activity android:name=".activity.EditNumberActivity"/>
     </application>
 
 </manifest>

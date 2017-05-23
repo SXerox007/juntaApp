@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.skeleton.R;
@@ -31,6 +32,7 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
     private Button btnResend, btnEditNo, btnverified, btnTool;
     private MaterialEditText metOTP1, metOTP2, metOTP3, metOTP4;
     private TextView tvPhoneNumber;
+    private ImageView ivBack;
     private ValidateEditText validateEditText;
     private Intent intent = getIntent();
 
@@ -41,9 +43,19 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
         init();
         tvPhoneNumber.setText(Paper.book().read(INTENT_KEY_COUNTRY_CODE) + "-" + Paper.book().read(INTENT_KEY_PHONE_NUMBER));
         btnTool.setVisibility(View.GONE);
+        onClickItems();
+
+    }
+
+
+    /**
+     * on click
+     */
+    private void onClickItems() {
         btnverified.setOnClickListener(this);
         btnResend.setOnClickListener(this);
         btnEditNo.setOnClickListener(this);
+        ivBack.setOnClickListener(this);
     }
 
 
@@ -51,6 +63,7 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
      * initilization
      */
     private void init() {
+        ivBack = (ImageView) findViewById(R.id.ivBack);
         btnResend = (Button) findViewById(R.id.btnResendOTP);
         btnEditNo = (Button) findViewById(R.id.btnEditNumber);
         btnverified = (Button) findViewById(R.id.btnVerify);
@@ -112,11 +125,7 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
                 apiInterface.resendOTP((String) Paper.book().read(ACCESS_TOKEN)).enqueue(new ResponseResolver<Response>(this, true, true) {
                     @Override
                     public void success(final Response response) {
-                        if ("200".equals(response.getStatusCode())) {
-                            Log.e("debug", "OTP resend.");
-                        } else {
-                            Log.e("debug", "OTP resend failed in Sucess.");
-                        }
+                        Log.e("debug", "OTP resend.");
                     }
 
                     @Override
@@ -130,6 +139,9 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
             case R.id.btnEditNumber:
                 intent = new Intent(OTPActivity.this, EditNumberActivity.class);
                 startActivityForResult(intent, REQUEST_CODE);
+                break;
+            case R.id.ivBack:
+                onBackPressFunctionality();
                 break;
             default:
                 break;
@@ -180,9 +192,24 @@ public class OTPActivity extends BaseActivity implements TextWatcher, View.OnCli
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        onBackPressFunctionality();
+    }
+
+    @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         tvPhoneNumber.setText(Paper.book().read(INTENT_KEY_COUNTRY_CODE) + "-" + Paper.book().read(INTENT_KEY_PHONE_NUMBER));
+    }
+
+
+    /**
+     * on back press
+     */
+    private void onBackPressFunctionality() {
+        Paper.book().delete(ACCESS_TOKEN);
 
     }
+
 
 }

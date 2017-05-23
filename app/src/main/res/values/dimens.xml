@@ -1,3 +1,9 @@
+<!DOCTYPE resources [
+    <!ELEMENT resources (dimen)*>
+    <!ELEMENT dimen (#PCDATA)>
+    <!ATTLIST dimen
+        name CDATA #REQUIRED>
+    ]>
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
